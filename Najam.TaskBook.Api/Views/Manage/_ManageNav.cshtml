@@ -1,5 +1,6 @@
-﻿@using Najam.TaskBook.Api.Views.Manage
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@using Najam.TaskBook.Api.Domain
+@using Najam.TaskBook.Api.Views.Manage
+@inject SignInManager<User> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

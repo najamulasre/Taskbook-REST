@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Najam.TaskBook.Api.Data;
+using Najam.TaskBook.Api.Domain;
 using Najam.TaskBook.Api.Models;
 using Najam.TaskBook.Api.Services;
 
@@ -29,7 +30,7 @@ namespace Najam.TaskBook.Api
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
