@@ -4,7 +4,7 @@ using Najam.TaskBook.Domain;
 
 namespace Najam.TaskBook.Data.Configurations
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<Role>
+    public class RoleEntityTypeConfig : IEntityTypeConfiguration<Role>
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {

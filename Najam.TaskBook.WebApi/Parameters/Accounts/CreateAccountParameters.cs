@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Najam.TaskBook.WebApi.Parameters.Accounts
 {
-    public class CreateAccountParameters
+    public class CreateAccountParameters : LogonParameters
     {
         [Required]
-        [MaxLength(256)]
-        public string UserName { get; set; }
+        [EmailAddress(ErrorMessage = "{0} is not a valid email address format")]
+        [StringLength(256, ErrorMessage = "The maximum length for {0} is {1}.")]
+        public string Email { get; set; }
 
-        [Required]
-        [MaxLength(256)]
-        public string Password { get; set; }
-
-        [Required]
-        [MaxLength(256)]
-        [Compare(nameof(Password))]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

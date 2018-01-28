@@ -4,7 +4,7 @@ using Najam.TaskBook.Domain;
 
 namespace Najam.TaskBook.Data.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserEntityTypeConfig : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
