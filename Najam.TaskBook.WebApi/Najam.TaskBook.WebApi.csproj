@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Postman\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

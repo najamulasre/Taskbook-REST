@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,10 +34,14 @@ namespace Najam.TaskBook.WebApi.Controllers
             _jwtOptions = jwtOptionsSnapshot.Value;
         }
 
-        [HttpGet(Name = nameof(GetAccount))]
-        public async Task<IActionResult> GetAccount()
+        [HttpGet("{userName}", Name = nameof(GetAccount))]
+        public async Task<IActionResult> GetAccount(string userName)
         {
             var user = await _userManager.GetUserAsync(User);
+
+            if (!string.Equals(userName, user.UserName, StringComparison.InvariantCultureIgnoreCase))
+                return Unauthorized();
+
             var account = new AccountViewModel
             {
                 UserName = user.UserName,
@@ -51,7 +54,7 @@ namespace Najam.TaskBook.WebApi.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Post([FromBody]CreateAccountParameters parameters)
+        public async Task<IActionResult> CreateAccount([FromBody]CreateAccountParameters parameters)
         {
             if (parameters == null)
                 return BadRequest();
@@ -75,7 +78,7 @@ namespace Najam.TaskBook.WebApi.Controllers
                     Email = user.Email
                 };
 
-                return CreatedAtRoute(nameof(GetAccount), account);
+                return CreatedAtRoute(nameof(GetAccount), new { parameters.UserName }, account);
             }
 
             foreach (var error in result.Errors)
@@ -101,11 +104,11 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (!result.Succeeded)
                 return Unauthorized();
 
-            var user = _userManager.Users.Single(u => u.UserName == parameters.UserName);
+            var user = await _userManager.FindByNameAsync(parameters.UserName);
 
             var claims = new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
