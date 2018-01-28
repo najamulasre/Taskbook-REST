@@ -330,10 +330,10 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8c47414d-df49-4fa7-ba91-6630d9878413",
+								"id": "c426c48e-c133-485c-bc62-a6af6a7555ce",
 								"type": "text/javascript",
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
+									"var jsonData = responseBody ? JSON.parse(responseBody)  : { \"token\" : null};",
 									"postman.setEnvironmentVariable(\"token\", jsonData.token);",
 									"postman.setEnvironmentVariable(\"loggedOnUserName\", JSON.parse(request.data).userName);",
 									""
@@ -374,13 +374,12 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "43f7af53-66a8-4a80-b72b-770cd473cea2",
+								"id": "118bf387-7369-49f1-a567-bb6c1ea02fa8",
 								"type": "text/javascript",
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
+									"var jsonData = responseBody ? JSON.parse(responseBody)  : { \"token\" : null};",
 									"postman.setEnvironmentVariable(\"token\", jsonData.token);",
 									"postman.setEnvironmentVariable(\"loggedOnUserName\", JSON.parse(request.data).userName);",
-									"",
 									""
 								]
 							}
@@ -407,6 +406,51 @@
 								"api",
 								"accounts",
 								"logon"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Change Password",
+			"description": "",
+			"item": [
+				{
+					"name": "Change Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currentPassword\": \"Xyz123%\",\n    \"newPassword\": \"Password.1\",\n    \"confirmPassword\":\"Password.1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/credentials/{{user1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"credentials",
+								"{{user1}}"
 							]
 						},
 						"description": ""

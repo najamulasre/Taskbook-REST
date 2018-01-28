@@ -10,7 +10,7 @@ namespace Najam.TaskBook.WebApi.Parameters.Accounts
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare(nameof(Password), ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

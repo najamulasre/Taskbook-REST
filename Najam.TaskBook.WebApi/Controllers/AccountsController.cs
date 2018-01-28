@@ -68,7 +68,7 @@ namespace Najam.TaskBook.WebApi.Controllers
                 Email = parameters.Email
             };
 
-            var result = await _userManager.CreateAsync(user, parameters.Password);
+            IdentityResult result = await _userManager.CreateAsync(user, parameters.Password);
 
             if (result.Succeeded)
             {
