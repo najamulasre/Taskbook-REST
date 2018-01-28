@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,12 @@ namespace Najam.TaskBook.WebApi.Controllers
     public class ProfilesController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public ProfilesController(UserManager<User> userManager)
+        public ProfilesController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> GetProfile(string userName)
@@ -30,13 +33,7 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (user.Id != loggedOnUser.Id)
                 return Forbid();
 
-            var profile = new ProfileViewModel
-            {
-                Email = loggedOnUser.Email,
-                FirstName = loggedOnUser.FirstName,
-                LastName = loggedOnUser.LastName,
-                DateOfBirth = loggedOnUser.DateOfBirth
-            };
+            var profile = _mapper.Map<ProfileViewModel>(loggedOnUser);
 
             return Ok(profile);
         }

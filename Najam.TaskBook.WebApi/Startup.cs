@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,8 @@ namespace Najam.TaskBook.WebApi
                 .AddEntityFrameworkStores<TaskBookDbContext>();
 
             AddJwt(services);
+
+            services.AddAutoMapper();
 
             AddMvc(services);
 
