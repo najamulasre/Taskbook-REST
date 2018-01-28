@@ -8,7 +8,7 @@ using Najam.TaskBook.WebApi.Parameters.Credentials;
 namespace Najam.TaskBook.WebApi.Controllers
 {
     [Authorize]
-    [Route("api/Credentials")]
+    [Route("api/accounts/{userName}/credentials")]
     public class CredentialsController : BaseController
     {
         private readonly UserManager<User> _userManager;
@@ -18,7 +18,7 @@ namespace Najam.TaskBook.WebApi.Controllers
             _userManager = userManager;
         }
 
-        [HttpPut("{userName}")]
+        [HttpPut]
         public async Task<IActionResult> ChangePassword(
             [FromRoute] string userName,
             [FromBody] ChangePasswordParameters parameters)

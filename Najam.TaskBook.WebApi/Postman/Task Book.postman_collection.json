@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Create Account",
+			"name": "Accounts",
 			"description": "",
 			"item": [
 				{
@@ -205,13 +205,7 @@
 						"description": ""
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Get Account",
-			"description": "",
-			"item": [
+				},
 				{
 					"name": "Get Account - Logged On User",
 					"event": [
@@ -265,65 +259,6 @@
 					},
 					"response": []
 				},
-				{
-					"name": "Get Account - Other user",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "cdb46984-8cde-4785-882d-8c6937b64c9d",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "bd0098c2-62f3-4a4e-aa83-42933cebc036",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{url}}/api/accounts/invalid.user",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"accounts",
-								"invalid.user"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Logon",
-			"description": "",
-			"item": [
 				{
 					"name": "Logon - User1",
 					"event": [
@@ -411,11 +346,64 @@
 						"description": ""
 					},
 					"response": []
+				},
+				{
+					"name": "Get Account - Other user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cdb46984-8cde-4785-882d-8c6937b64c9d",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd0098c2-62f3-4a4e-aa83-42933cebc036",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/accounts/invalid.user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"invalid.user"
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "Change Password",
+			"name": "Credentials",
 			"description": "",
 			"item": [
 				{
@@ -440,17 +428,56 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"currentPassword\": \"Xyz123%\",\n    \"newPassword\": \"Password.1\",\n    \"confirmPassword\":\"Password.1\"\n}"
+							"raw": "{\n    \"currentPassword\": \"Password.1\",\n    \"newPassword\": \"Password.1\",\n    \"confirmPassword\":\"Password.1\"\n}"
 						},
 						"url": {
-							"raw": "{{url}}/api/credentials/{{user1}}",
+							"raw": "{{url}}/api/accounts/{{user1}}/credentials",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"credentials",
-								"{{user1}}"
+								"accounts",
+								"{{user1}}",
+								"credentials"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profiles",
+			"description": "",
+			"item": [
+				{
+					"name": "{{url}}/api/accounts/{{user1}}/profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"profile"
 							]
 						},
 						"description": ""
