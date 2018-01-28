@@ -453,7 +453,7 @@
 			"description": "",
 			"item": [
 				{
-					"name": "{{url}}/api/accounts/{{user1}}/profile",
+					"name": "Get Profile",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -468,6 +468,36 @@
 						"method": "GET",
 						"header": [],
 						"body": {},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"profile"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/api/accounts/{{user1}}/profile",
 							"host": [

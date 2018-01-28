@@ -13,6 +13,10 @@ namespace Najam.TaskBook.Data.Configurations
 
             builder.Property(u => u.DateOfBirth)
                 .HasColumnType("date");
+
+            builder.Property(u => u.FirstName).HasMaxLength(100);
+
+            builder.Property(u => u.LastName).HasMaxLength(100);
         }
     }
 }

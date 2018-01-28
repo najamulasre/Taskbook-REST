@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.Profiles;
+using Najam.TaskBook.WebApi.Parameters.Profiles;
 
 namespace Najam.TaskBook.WebApi.Mappings
 {
@@ -9,6 +10,7 @@ namespace Najam.TaskBook.WebApi.Mappings
         public TypeMappingProfile()
         {
             CreateMap<User, ProfileViewModel>();
+            CreateMap<UpdateProfileParameters, User>();
         }
     }
 }
