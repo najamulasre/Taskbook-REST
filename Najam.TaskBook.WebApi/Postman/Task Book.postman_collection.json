@@ -487,6 +487,16 @@
 				{
 					"name": "Update Profile",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -496,7 +506,51 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n    \"firstName\": \"AAAAA\",\n    \"lastName\": \"BBBBB\",\n    \"email\": \"khan10200@gmail.com\",\n    \"dateOfBirth\": \"1970-09-19\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"profile"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{ \"op\": \"replace\", \"path\": \"/firstName\", \"value\": \"xxxxxxxx\" },\n\t{ \"op\": \"replace\", \"path\": \"/lastName\", \"value\": \"yyyyyyy\" }\n]"
 						},
 						"url": {
 							"raw": "{{url}}/api/accounts/{{user1}}/profile",

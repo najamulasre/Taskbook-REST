@@ -10,7 +10,7 @@ namespace Najam.TaskBook.WebApi.Mappings
         public TypeMappingProfile()
         {
             CreateMap<User, ProfileViewModel>();
-            CreateMap<UpdateProfileParameters, User>();
+            CreateMap<UpdateProfileParameters, User>().ReverseMap();
         }
     }
 }
