@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace Najam.TaskBook.Domain
@@ -10,5 +11,7 @@ namespace Najam.TaskBook.Domain
         public string LastName { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
+
+        public virtual ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
     }
 }

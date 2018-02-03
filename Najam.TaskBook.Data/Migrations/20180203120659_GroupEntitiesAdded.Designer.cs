@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Najam.TaskBook.Data;
-using Najam.TaskBook.Domain;
 using System;
 
 namespace Najam.TaskBook.Data.Migrations
 {
     [DbContext(typeof(TaskBookDbContext))]
-    partial class TaskBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180203120659_GroupEntitiesAdded")]
+    partial class GroupEntitiesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +109,6 @@ namespace Najam.TaskBook.Data.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("date")
                         .HasDefaultValueSql("getdate()");
 
                     b.Property<bool>("IsActive");
@@ -214,8 +213,6 @@ namespace Najam.TaskBook.Data.Migrations
                     b.Property<Guid>("UserId");
 
                     b.Property<Guid>("GroupId");
-
-                    b.Property<int>("RelationType");
 
                     b.HasKey("UserId", "GroupId");
 
