@@ -36,6 +36,7 @@ namespace Najam.TaskBook.WebApi
                 .AddEntityFrameworkStores<TaskBookDbContext>();
 
             services.AddScoped<IIdentityBusiness, IdentityBusiness>();
+            services.AddScoped<ITaskBookBusiness, TaskBookBusiness>();
 
             AddJwt(services);
 
