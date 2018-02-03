@@ -8,10 +8,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+
+using Najam.TaskBook.Business;
 using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Config;
 using Najam.TaskBook.WebApi.Models;
 using Najam.TaskBook.WebApi.Parameters.Accounts;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 
 namespace Najam.TaskBook.WebApi.Controllers
@@ -20,24 +23,21 @@ namespace Najam.TaskBook.WebApi.Controllers
     [Route("api/accounts")]
     public class AccountsController : BaseController
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly IIdentityBusiness _identityBusiness;
         private readonly JwtConfigOptions _jwtOptions;
 
         public AccountsController(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
+            IIdentityBusiness identityBusiness,
             IOptions<JwtConfigOptions> jwtOptionsSnapshot)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _identityBusiness = identityBusiness;
             _jwtOptions = jwtOptionsSnapshot.Value;
         }
 
         [HttpGet("{userName}", Name = nameof(GetAccount))]
         public async Task<IActionResult> GetAccount(string userName)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _identityBusiness.GetUserAsync(User);
 
             if (!string.Equals(userName, user.UserName, StringComparison.InvariantCultureIgnoreCase))
                 return Unauthorized();
@@ -68,7 +68,7 @@ namespace Najam.TaskBook.WebApi.Controllers
                 Email = parameters.Email
             };
 
-            IdentityResult result = await _userManager.CreateAsync(user, parameters.Password);
+            IdentityResult result = await _identityBusiness.CreateAsync(user, parameters.Password);
 
             if (result.Succeeded)
             {
@@ -99,12 +99,12 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            var result = await _signInManager.PasswordSignInAsync(parameters.UserName, parameters.Password, false, false);
+            SignInResult result = await _identityBusiness.PasswordSignInAsync(parameters.UserName, parameters.Password);
 
             if (!result.Succeeded)
                 return Unauthorized();
 
-            var user = await _userManager.FindByNameAsync(parameters.UserName);
+            var user = await _identityBusiness.FindByNameAsync(parameters.UserName);
 
             var claims = new[]
                 {

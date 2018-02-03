@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Najam.TaskBook.Business;
 using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.Profiles;
 using Najam.TaskBook.WebApi.Parameters.Profiles;
@@ -14,23 +15,23 @@ namespace Najam.TaskBook.WebApi.Controllers
     [Route("api/accounts/{userName}/profile")]
     public class ProfilesController : BaseController
     {
-        private readonly UserManager<User> _userManager;
+        private readonly IIdentityBusiness _identityBusiness;
         private readonly IMapper _mapper;
 
-        public ProfilesController(UserManager<User> userManager, IMapper mapper)
+        public ProfilesController(IIdentityBusiness identityBusiness, IMapper mapper)
         {
-            _userManager = userManager;
+            _identityBusiness = identityBusiness;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> GetProfile(string userName)
         {
-            User user = await _userManager.FindByNameAsync(userName);
+            User user = await _identityBusiness.FindByNameAsync(userName);
 
             if (user == null)
                 return NotFound();
 
-            User loggedOnUser = await _userManager.GetUserAsync(User);
+            User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
             if (user.Id != loggedOnUser.Id)
                 return Forbid();
@@ -51,19 +52,19 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            User user = await _userManager.FindByNameAsync(userName);
+            User user = await _identityBusiness.FindByNameAsync(userName);
 
             if (user == null)
                 return NotFound();
 
-            User loggedOnUser = await _userManager.GetUserAsync(User);
+            User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
             if (user.Id != loggedOnUser.Id)
                 return Forbid();
 
             _mapper.Map(parameters, loggedOnUser);
 
-            IdentityResult result = await _userManager.UpdateAsync(loggedOnUser);
+            IdentityResult result = await _identityBusiness.UpdateAsync(loggedOnUser);
 
             if (!result.Succeeded)
             {
@@ -75,7 +76,7 @@ namespace Najam.TaskBook.WebApi.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
-            User updatedUser = await _userManager.GetUserAsync(User);
+            User updatedUser = await _identityBusiness.GetUserAsync(User);
 
             var profile = _mapper.Map<ProfileViewModel>(updatedUser);
 
@@ -90,12 +91,12 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (patchDocument == null)
                 return BadRequest();
 
-            User user = await _userManager.FindByNameAsync(userName);
+            User user = await _identityBusiness.FindByNameAsync(userName);
 
             if (user == null)
                 return NotFound();
 
-            User loggedOnUser = await _userManager.GetUserAsync(User);
+            User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
             if (user.Id != loggedOnUser.Id)
                 return Forbid();
@@ -113,7 +114,7 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             _mapper.Map(userToPatch, loggedOnUser);
 
-            IdentityResult result = await _userManager.UpdateAsync(loggedOnUser);
+            IdentityResult result = await _identityBusiness.UpdateAsync(loggedOnUser);
 
             if (!result.Succeeded)
             {

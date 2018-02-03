@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Najam.TaskBook.Business;
 using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Parameters.Credentials;
 
@@ -11,11 +12,11 @@ namespace Najam.TaskBook.WebApi.Controllers
     [Route("api/accounts/{userName}/credentials")]
     public class CredentialsController : BaseController
     {
-        private readonly UserManager<User> _userManager;
+        private readonly IIdentityBusiness _identityBusiness;
 
-        public CredentialsController(UserManager<User> userManager)
+        public CredentialsController(IIdentityBusiness identityBusiness)
         {
-            _userManager = userManager;
+            _identityBusiness = identityBusiness;
         }
 
         [HttpPut]
@@ -29,17 +30,17 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            User user = await _userManager.FindByNameAsync(userName);
+            User user = await _identityBusiness.FindByNameAsync(userName);
 
             if (user == null)
                 return NotFound();
 
-            User loggedOnUser = await _userManager.GetUserAsync(User);
+            User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
             if (user.Id != loggedOnUser.Id)
                 return Forbid();
 
-            IdentityResult result = await _userManager.ChangePasswordAsync(loggedOnUser, parameters.CurrentPassword, parameters.NewPassword);
+            IdentityResult result = await _identityBusiness.ChangePasswordAsync(loggedOnUser, parameters.CurrentPassword, parameters.NewPassword);
 
             if (result.Succeeded)
                 return NoContent();

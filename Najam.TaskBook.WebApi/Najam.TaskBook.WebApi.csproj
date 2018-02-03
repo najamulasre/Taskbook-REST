@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Najam.TaskBook.Business\Najam.TaskBook.Business.csproj" />
     <ProjectReference Include="..\Najam.TaskBook.Data\Najam.TaskBook.Data.csproj" />
   </ItemGroup>
 

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Najam.TaskBook.Business;
 using Najam.TaskBook.Data;
 using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Config;
@@ -33,6 +34,8 @@ namespace Najam.TaskBook.WebApi
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<TaskBookDbContext>();
+
+            services.AddScoped<IIdentityBusiness, IdentityBusiness>();
 
             AddJwt(services);
 
