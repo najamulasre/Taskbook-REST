@@ -1,14 +1,13 @@
 {
 	"info": {
 		"name": "Task Book",
-		"_postman_id": "cd26c91d-a08f-d73b-bb0a-d8d091bbeba1",
+		"_postman_id": "f44110e3-4354-7998-611d-f3c26809018f",
 		"description": "A collection to test Task Book RESTful APIs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Accounts",
-			"description": "",
 			"item": [
 				{
 					"name": "Create Account - User1",
@@ -33,8 +32,7 @@
 								"api",
 								"accounts"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -61,8 +59,7 @@
 								"api",
 								"accounts"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -89,8 +86,7 @@
 								"api",
 								"accounts"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -117,8 +113,7 @@
 								"api",
 								"accounts"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -145,8 +140,7 @@
 								"api",
 								"accounts"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -173,8 +167,7 @@
 								"api",
 								"accounts"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -201,8 +194,7 @@
 								"api",
 								"accounts"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -243,7 +235,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/api/accounts/{{loggedOnUserName}}",
 							"host": [
@@ -254,8 +249,7 @@
 								"accounts",
 								"{{loggedOnUserName}}"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -298,8 +292,7 @@
 								"accounts",
 								"logon"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -342,8 +335,7 @@
 								"accounts",
 								"logon"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -384,7 +376,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/api/accounts/invalid.user",
 							"host": [
@@ -395,8 +390,7 @@
 								"accounts",
 								"invalid.user"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
@@ -404,7 +398,6 @@
 		},
 		{
 			"name": "Credentials",
-			"description": "",
 			"item": [
 				{
 					"name": "Change Password",
@@ -441,8 +434,7 @@
 								"{{user1}}",
 								"credentials"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
@@ -450,7 +442,6 @@
 		},
 		{
 			"name": "Profiles",
-			"description": "",
 			"item": [
 				{
 					"name": "Get Profile",
@@ -467,7 +458,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/api/accounts/{{user1}}/profile",
 							"host": [
@@ -479,8 +473,7 @@
 								"{{user1}}",
 								"profile"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -519,8 +512,7 @@
 								"{{user1}}",
 								"profile"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -563,8 +555,7 @@
 								"{{user1}}",
 								"profile"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
@@ -572,7 +563,6 @@
 		},
 		{
 			"name": "User Groups",
-			"description": "",
 			"item": [
 				{
 					"name": "Get All User Groups",
@@ -589,7 +579,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/api/accounts/{{user1}}/groups",
 							"host": [
@@ -601,8 +594,7 @@
 								"{{user1}}",
 								"groups"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -641,8 +633,7 @@
 								"{{user1}}",
 								"groups"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -661,7 +652,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/api/accounts/{{user1}}/groups/0beed7a7-4855-4fd0-b87f-2f2e8072e80a",
 							"host": [
@@ -674,154 +668,7 @@
 								"groups",
 								"0beed7a7-4855-4fd0-b87f-2f2e8072e80a"
 							]
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Group Memberships - Get All",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"accounts",
-								"{{user1}}",
-								"groups",
-								"{{manglaGroupId}}",
-								"memberships"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Group Memberships - Get by UserName",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"accounts",
-								"{{user1}}",
-								"groups",
-								"{{manglaGroupId}}",
-								"memberships",
-								"{{user2}}"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Group Memberships - Delete Membership",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"accounts",
-								"{{user1}}",
-								"groups",
-								"{{manglaGroupId}}",
-								"memberships",
-								"{{user2}}"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Group Memberships - Create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"userName\" : \"{{user2}}\"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"accounts",
-								"{{user1}}",
-								"groups",
-								"{{manglaGroupId}}",
-								"memberships"
-							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -840,7 +687,10 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/api/accounts/{{user1}}/groups/9b98bfa7-9cfe-40c7-a6db-b5c7eb434617",
 							"host": [
@@ -853,8 +703,7 @@
 								"groups",
 								"9b98bfa7-9cfe-40c7-a6db-b5c7eb434617"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -894,8 +743,164 @@
 								"groups",
 								"0beed7a7-4855-4fd0-b87f-2f2e8072e80a"
 							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Group Memberships",
+			"description": "",
+			"item": [
+				{
+					"name": "Get by UserName",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
-						"description": ""
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships",
+								"{{user2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Membership",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\" : \"{{user2}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Membership",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships",
+								"{{user2}}"
+							]
+						}
 					},
 					"response": []
 				}
