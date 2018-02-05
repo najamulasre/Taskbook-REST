@@ -9,6 +9,8 @@ namespace Najam.TaskBook.WebApi.Controllers
     {
         protected UnprocessableEntityResult UnprocessableEntity(ModelStateDictionary modelState) => new UnprocessableEntityResult(modelState);
 
+        protected ConflictResult Conflict(string message) => new ConflictResult(message);
+
         protected StatusCodeResult StatusCode(HttpStatusCode statusCode) => StatusCode((int) statusCode);
     }
 }

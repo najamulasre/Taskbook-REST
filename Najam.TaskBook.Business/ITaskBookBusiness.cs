@@ -15,5 +15,15 @@ namespace Najam.TaskBook.Business
         Task DeleteGroup(Guid groupId);
 
         Task<UserGroup> UpdateGroup(Guid userId, Guid groupId, string groupName, bool isActive);
+
+        Task<bool> IsUserGroupOwner(Guid userId, Guid groupId);
+
+        Task<UserGroup[]> GetGroupMemberships(Guid groupId);
+
+        Task<UserGroup> GetGroupMembership(Guid userId, Guid groupId);
+
+        Task<UserGroup> CrateGroupMembership(Guid userId, Guid groupId);
+
+        Task DeleteGroupMembership(Guid userId, Guid groupId);
     }
 }

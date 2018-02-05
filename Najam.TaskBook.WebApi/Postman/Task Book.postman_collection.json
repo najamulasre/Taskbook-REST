@@ -680,6 +680,152 @@
 					"response": []
 				},
 				{
+					"name": "Group Memberships - Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Group Memberships - Get by UserName",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships",
+								"{{user2}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Group Memberships - Delete Membership",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships",
+								"{{user2}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Group Memberships - Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\" : \"{{user2}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Delete User Group",
 					"request": {
 						"auth": {

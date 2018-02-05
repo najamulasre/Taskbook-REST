@@ -79,5 +79,57 @@ namespace Najam.TaskBook.Business
 
             return await GetUserGroupByGroupId(userId, group.Id);
         }
+
+        public Task<bool> IsUserGroupOwner(Guid userId, Guid groupId)
+        {
+            IQueryable<UserGroup> query = _dbContext.UserGroups
+                .Where(ug => ug.UserId == userId && ug.GroupId == groupId && ug.RelationType == UserGroupRelationType.Owner);
+
+            return query.AnyAsync();
+        }
+
+        public Task<UserGroup[]> GetGroupMemberships(Guid groupId)
+        {
+            IQueryable<UserGroup> query = _dbContext.UserGroups
+                .Include(ug => ug.Group)
+                .Include(ug => ug.User)
+                .Where(ug => ug.GroupId == groupId && ug.RelationType == UserGroupRelationType.Member);
+
+            return query.ToArrayAsync();
+        }
+
+        public Task<UserGroup> GetGroupMembership(Guid userId, Guid groupId)
+        {
+            return _dbContext.UserGroups
+                .Include(ug => ug.Group)
+                .Include(ug => ug.User)
+                .SingleOrDefaultAsync(ug => ug.GroupId == groupId && ug.UserId == userId);
+        }
+
+        public async Task<UserGroup> CrateGroupMembership(Guid userId, Guid groupId)
+        {
+            var userGroup = new UserGroup
+            {
+                UserId = userId,
+                GroupId = groupId,
+                RelationType = UserGroupRelationType.Member
+            };
+
+            _dbContext.UserGroups.Add(userGroup);
+            await _dbContext.SaveChangesAsync();
+
+            return await GetGroupMembership(userId, groupId);
+        }
+
+        public async Task DeleteGroupMembership(Guid userId, Guid groupId)
+        {
+            UserGroup group = await GetGroupMembership(userId, groupId);
+
+            if (group == null)
+                return;
+
+            _dbContext.UserGroups.Remove(group);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
