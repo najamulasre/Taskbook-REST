@@ -11,7 +11,7 @@ using Najam.TaskBook.WebApi.Parameters.GroupMemberships;
 namespace Najam.TaskBook.WebApi.Controllers
 {
     [Authorize]
-    [Route("Api/Accounts/{UserName}/Groups/{groupId}/memberships")]
+    [Route("api/groups/{groupId}/memberships")]
     public class GroupMembershipsController : BaseController
     {
         private readonly IMapper _mapper;
@@ -26,22 +26,14 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{memberUserName}", Name = nameof(GetMembershipByMemberUserName))]
-        public async Task<IActionResult> GetMembershipByMemberUserName(string userName, Guid groupId, string memberUserName)
+        public async Task<IActionResult> GetMembershipByMemberUserName(Guid groupId, string memberUserName)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             var loggedOnUserIsGroupOwner = await _taskBookBusiness.IsUserGroupOwner(loggedOnUser.Id, groupId);
 
             if (!loggedOnUserIsGroupOwner)
-                return Forbid();
+                return NotFound();
 
             User memberUser = await _identityBusiness.FindByNameAsync(memberUserName);
 
@@ -59,22 +51,14 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllMemberships(string userName, Guid groupId)
+        public async Task<IActionResult> GetAllMemberships(Guid groupId)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             var loggedOnUserIsGroupOwner = await _taskBookBusiness.IsUserGroupOwner(loggedOnUser.Id, groupId);
 
             if (!loggedOnUserIsGroupOwner)
-                return Forbid();
+                return NotFound();
 
             UserGroup[] memberships = await _taskBookBusiness.GetGroupMemberships(groupId);
 
@@ -84,22 +68,14 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMembership(string userName, Guid groupId, [FromBody] CreateGroupMembershipParameters parameters)
+        public async Task<IActionResult> CreateMembership(Guid groupId, [FromBody] CreateGroupMembershipParameters parameters)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             var loggedOnUserIsGroupOwner = await _taskBookBusiness.IsUserGroupOwner(loggedOnUser.Id, groupId);
 
             if (!loggedOnUserIsGroupOwner)
-                return Forbid();
+                return NotFound();
 
             if (!ModelState.IsValid)
             {
@@ -124,22 +100,14 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpDelete("{memberUserName}")]
-        public async Task<IActionResult> DeleteMembership(string userName, Guid groupId, string memberUserName)
+        public async Task<IActionResult> DeleteMembership(Guid groupId, string memberUserName)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             var loggedOnUserIsGroupOwner = await _taskBookBusiness.IsUserGroupOwner(loggedOnUser.Id, groupId);
 
             if (!loggedOnUserIsGroupOwner)
-                return Forbid();
+                return NotFound();
 
             User memberUser = await _identityBusiness.FindByNameAsync(memberUserName);
 
