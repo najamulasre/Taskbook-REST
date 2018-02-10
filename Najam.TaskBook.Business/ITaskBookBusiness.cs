@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Najam.TaskBook.Domain;
 
+
 namespace Najam.TaskBook.Business
 {
     public interface ITaskBookBusiness
@@ -12,7 +13,7 @@ namespace Najam.TaskBook.Business
 
         Task<UserGroup> CreateUserGroup(Guid userId, string groupName, bool isActive);
 
-        Task DeleteGroup(Guid groupId);
+        System.Threading.Tasks.Task DeleteGroup(Guid groupId);
 
         Task<UserGroup> UpdateGroup(Guid userId, Guid groupId, string groupName, bool isActive);
 
@@ -24,7 +25,7 @@ namespace Najam.TaskBook.Business
 
         Task<UserGroup> CrateGroupMembership(Guid userId, Guid groupId);
 
-        Task DeleteGroupMembership(Guid userId, Guid groupId);
+        System.Threading.Tasks.Task DeleteGroupMembership(Guid userId, Guid groupId);
 
         Task<UserGroup[]> GetUserMemberships(Guid userId);
     }

@@ -21,6 +21,7 @@ namespace Najam.TaskBook.Data
 
         public DbSet<UserGroup> UserGroups { get; set; }
 
+        public DbSet<Task> Tasks { get; set; }
 
         public TaskBookDbContext(DbContextOptions<TaskBookDbContext> options):base(options)
         {
@@ -31,8 +32,9 @@ namespace Najam.TaskBook.Data
             builder
                 .ApplyConfiguration(new UserEntityTypeConfig())
                 .ApplyConfiguration(new RoleEntityTypeConfig())
-                .ApplyConfiguration(new GroupEntityTypeConfiguration())
-                .ApplyConfiguration(new UserGroupEntityTypeConfiguration());
+                .ApplyConfiguration(new GroupEntityTypeConfig())
+                .ApplyConfiguration(new UserGroupEntityTypeConfig())
+                .ApplyConfiguration(new TaskEntityTypeConfig());
 
             base.OnModelCreating(builder);
         }

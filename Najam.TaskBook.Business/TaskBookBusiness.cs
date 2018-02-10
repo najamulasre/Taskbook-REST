@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Najam.TaskBook.Data;
 using Najam.TaskBook.Domain;
 
+
 namespace Najam.TaskBook.Business
 {
     public class TaskBookBusiness : ITaskBookBusiness
@@ -60,7 +61,7 @@ namespace Najam.TaskBook.Business
             return await GetUserGroupByGroupId(userId, group.Id);
         }
 
-        public Task DeleteGroup(Guid groupId)
+        public System.Threading.Tasks.Task DeleteGroup(Guid groupId)
         {
             Group group = _dbContext.Groups.Single(g => g.Id == groupId);
             _dbContext.Groups.Remove(group);
@@ -121,7 +122,7 @@ namespace Najam.TaskBook.Business
             return await GetGroupMembership(userId, groupId);
         }
 
-        public async Task DeleteGroupMembership(Guid userId, Guid groupId)
+        public async System.Threading.Tasks.Task DeleteGroupMembership(Guid userId, Guid groupId)
         {
             UserGroup group = await GetGroupMembership(userId, groupId);
 

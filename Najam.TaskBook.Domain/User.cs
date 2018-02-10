@@ -13,5 +13,7 @@ namespace Najam.TaskBook.Domain
         public DateTime? DateOfBirth { get; set; }
 
         public virtual ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
+
+        public virtual ICollection<Task> Tasks { get; set; } = new HashSet<Task>();
     }
 }
