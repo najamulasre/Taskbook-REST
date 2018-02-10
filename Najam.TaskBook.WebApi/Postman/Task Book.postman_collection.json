@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "Task Book",
-		"_postman_id": "f44110e3-4354-7998-611d-f3c26809018f",
+		"_postman_id": "088f6f3f-ecc7-3ae7-51f7-b37bd969b705",
 		"description": "A collection to test Task Book RESTful APIs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -751,7 +751,6 @@
 		},
 		{
 			"name": "Group Memberships",
-			"description": "",
 			"item": [
 				{
 					"name": "Get by UserName",
@@ -901,6 +900,44 @@
 								"{{user2}}"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Memberships",
+			"description": "",
+			"item": [
+				{
+					"name": "Get User Memberships",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/accounts/{{user1}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"{{user1}}",
+								"memberships"
+							]
+						},
+						"description": ""
 					},
 					"response": []
 				}

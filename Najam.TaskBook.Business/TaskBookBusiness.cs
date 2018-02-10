@@ -131,5 +131,15 @@ namespace Najam.TaskBook.Business
             _dbContext.UserGroups.Remove(group);
             await _dbContext.SaveChangesAsync();
         }
+
+        public Task<UserGroup[]> GetUserMemberships(Guid userId)
+        {
+            IQueryable<UserGroup> query = _dbContext.UserGroups
+                .Include(ug => ug.User)
+                .Include(ug => ug.Group)
+                .Where(ug => ug.UserId == userId);
+
+            return query.ToArrayAsync();
+        }
     }
 }

@@ -25,5 +25,7 @@ namespace Najam.TaskBook.Business
         Task<UserGroup> CrateGroupMembership(Guid userId, Guid groupId);
 
         Task DeleteGroupMembership(Guid userId, Guid groupId);
+
+        Task<UserGroup[]> GetUserMemberships(Guid userId);
     }
 }
