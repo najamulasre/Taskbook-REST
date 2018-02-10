@@ -562,7 +562,7 @@
 			]
 		},
 		{
-			"name": "User Groups",
+			"name": "User Own Groups",
 			"item": [
 				{
 					"name": "Get All User Groups",
@@ -584,14 +584,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups",
+							"raw": "{{url}}/api/groups",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups"
 							]
 						}
@@ -623,14 +621,12 @@
 							"raw": "{\n\t\"groupName\" : \"Colleagues 2\",\n\t\"isActive\" : false\n}"
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups",
+							"raw": "{{url}}/api/groups",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups"
 							]
 						}
@@ -657,14 +653,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/0beed7a7-4855-4fd0-b87f-2f2e8072e80a",
+							"raw": "{{url}}/api/groups/0beed7a7-4855-4fd0-b87f-2f2e8072e80a",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups",
 								"0beed7a7-4855-4fd0-b87f-2f2e8072e80a"
 							]
@@ -692,14 +686,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/9b98bfa7-9cfe-40c7-a6db-b5c7eb434617",
+							"raw": "{{url}}/api/groups/9b98bfa7-9cfe-40c7-a6db-b5c7eb434617",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups",
 								"9b98bfa7-9cfe-40c7-a6db-b5c7eb434617"
 							]
@@ -732,20 +724,40 @@
 							"raw": "{\n\t\"groupName\" : \"Mangla Group\",\n\t\"isActive\" : false\n}"
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/0beed7a7-4855-4fd0-b87f-2f2e8072e80a",
+							"raw": "{{url}}/api/groups/0beed7a7-4855-4fd0-b87f-2f2e8072e80a",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups",
 								"0beed7a7-4855-4fd0-b87f-2f2e8072e80a"
 							]
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2a034bf1-d487-4bbe-817c-3652f4ac9b11",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "41aabaa6-54f1-4b74-87c1-f0045a1aff1a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -772,14 +784,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships/{{user2}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups",
 								"{{manglaGroupId}}",
 								"memberships",
@@ -809,14 +819,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups",
 								"{{manglaGroupId}}",
 								"memberships"
@@ -850,14 +858,12 @@
 							"raw": "{\n    \"userName\" : \"{{user2}}\"\n}"
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships",
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups",
 								"{{manglaGroupId}}",
 								"memberships"
@@ -886,14 +892,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/groups/{{manglaGroupId}}/memberships/{{user2}}",
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships/{{user2}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"groups",
 								"{{manglaGroupId}}",
 								"memberships",
@@ -926,14 +930,12 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{url}}/api/accounts/{{user1}}/memberships",
+							"raw": "{{url}}/api/memberships",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"accounts",
-								"{{user1}}",
 								"memberships"
 							]
 						},

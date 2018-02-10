@@ -10,7 +10,7 @@ using Najam.TaskBook.WebApi.Models.UserMemberships;
 namespace Najam.TaskBook.WebApi.Controllers
 {
     [Authorize]
-    [Route("api/accounts/{username}/memberships")]
+    [Route("api/memberships")]
     public class UserMembershipsController : BaseController
     {
         private readonly IIdentityBusiness _identityBusiness;
@@ -28,17 +28,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserMemberships(string userName)
+        public async Task<IActionResult> GetUserMemberships()
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (loggedOnUser.Id != user.Id)
-                return Forbid();
 
             UserGroup[] memberships = await _taskBookBusiness.GetUserMemberships(loggedOnUser.Id);
 
