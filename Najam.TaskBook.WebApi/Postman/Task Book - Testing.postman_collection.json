@@ -1,0 +1,356 @@
+{
+	"info": {
+		"name": "Task Book - Testing",
+		"_postman_id": "8a4cd10f-a653-e6b6-0f2b-464334516626",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accounts Testing",
+			"description": "",
+			"item": [
+				{
+					"name": "Create User Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhY2NvdW50Lm9uZSIsImp0aSI6IjdjZjJhOWY2LThlMjctNGY1ZS1iM2U1LWM0ZDcyN2E3MTkzNSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiZDE3NjQwOWQtMmYwNC1lODExLTgzNDAtODA4NmYyNTgwOGJjIiwiZXhwIjoxNTE3ODcxMTY3LCJpc3MiOiJuYWphbS5jby51ayIsImF1ZCI6Im5hamFtLmNvLnVrIn0.sGiG-lWyDnGwnjmpij1T3UbbzVhHoJQBoDJIO4aTl2E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserName\" : \"tester\",\n\t\"Email\" : \"test@test.com\",\n\t\"Password\" : \"Test123%\",\n\t\"ConfirmPassword\" : \"Test123%\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/accounts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"accounts",
+								""
+							]
+						},
+						"description": "Tests Performed\n\n\t1:\tWithout one or more parameters\n\t2:\tlength test for each parameter\n\t3:\tWrong email format (Doesn't check for dot)\n\t4:\tPassword without numeric value\n\t5:\tPassword without non-numeric value\n\t6:\tDifferent value for password and Confirm password \n\t7:\tDuplicate account\n\t9:\tEmpty JSON\n\t10: Empty body"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User2 for testing",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhY2NvdW50Lm9uZSIsImp0aSI6IjdjZjJhOWY2LThlMjctNGY1ZS1iM2U1LWM0ZDcyN2E3MTkzNSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiZDE3NjQwOWQtMmYwNC1lODExLTgzNDAtODA4NmYyNTgwOGJjIiwiZXhwIjoxNTE3ODcxMTY3LCJpc3MiOiJuYWphbS5jby51ayIsImF1ZCI6Im5hamFtLmNvLnVrIn0.sGiG-lWyDnGwnjmpij1T3UbbzVhHoJQBoDJIO4aTl2E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserName\" : \"tester1\",\n\t\"Email\" : \"test1@test.com\",\n\t\"Password\" : \"Test123$\",\n\t\"ConfirmPassword\" : \"Test123$\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/accounts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"accounts",
+								""
+							]
+						},
+						"description": "Tests Performed\n\n\t1:\tWithout one or more parameters\n\t2:\tlength test for each parameter\n\t3:\tWrong email format (Doesn't check for dot)\n\t4:\tPassword without numeric value\n\t5:\tPassword without non-numeric value\n\t6:\tDifferent value for password and Confirm password \n\t7:\tDuplicate account\n\t9:\tEmpty JSON\n\t10: Empty body"
+					},
+					"response": []
+				},
+				{
+					"name": "Logon User Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiIwMDMwMmUxMS0yN2ZlLTQ3ZDItYWVkNi01OWZhYmI1OTYzMGMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODAzMDkxNCwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.ygI3FTtDk8FQ6IqOry5vmRDrNF0KDTgH96Q5sWn7MxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserName\" : \"tester\",\n\t\"Password\" : \"%123Test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992//api/accounts/logon",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"",
+								"api",
+								"accounts",
+								"logon"
+							]
+						},
+						"description": "Test performed:\n\n\t1: Without one or more parameter\n\t2: Wrong username (401 Unauthorized)\n\t3: Wrong password(401 Unauthorized)\n\t4: Empty JSON\n\t5: Empty body"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiJkZjUyOGYzMS0xNzI5LTRmNTEtYTdiMC1mZDdmMzUwMTFjZGYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODAzNjQzNSwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.rv8OJ0KspGoyQ2aDBf6eRK7xroC5c0EXtFvnhbsvThI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50992//api/accounts/tester",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"",
+								"api",
+								"accounts",
+								"tester"
+							]
+						},
+						"description": "Tests Performed:\n\n   1: Without Bearer Token\n   2: Get other user\n   3: Get logged on user"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1454d4a4-0156-4483-b812-070dfef554c0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dcc58235-c251-4c83-a7fc-9881ab2a790b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Credentials Testing",
+			"description": "Tests Performed:\n\n\t1:  Without CurrentPassword parameter\n\t2:  Without NewPassword or ConfirmPassword (missing parameter required and passwords doesn't match)\n\t3:  Empty JSON\n\t4:  Empty body\n\t5:  Password mismatch\n\t6:  Length\n\t7:  Password without Captial alphabet\n\t8:  Password without numeric value\n\t9:  Password without spcial character\n\t10: Update Credentail with same parameters/value\t",
+			"item": [
+				{
+					"name": "Update Paword Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiIwMDMwMmUxMS0yN2ZlLTQ3ZDItYWVkNi01OWZhYmI1OTYzMGMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODAzMDkxNCwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.ygI3FTtDk8FQ6IqOry5vmRDrNF0KDTgH96Q5sWn7MxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CurrentPassword\" : \"Test123%\",\n\t\"NewPassword\" : \"%123Test\",\n\t\"ConfirmPassword\" : \"%123Test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/accounts/tester/credentials",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"accounts",
+								"tester",
+								"credentials"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3e760564-7f65-4dec-af9d-39cc2f03fd1b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "93279f18-65c0-4ff5-94cd-28a93d5f6dd2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Profiles Testing",
+			"description": "",
+			"item": [
+				{
+					"name": "Get profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiJkZjUyOGYzMS0xNzI5LTRmNTEtYTdiMC1mZDdmMzUwMTFjZGYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODAzNjQzNSwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.rv8OJ0KspGoyQ2aDBf6eRK7xroC5c0EXtFvnhbsvThI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"FirstName\" : \"Najam\",\n\t\"LastName\" : \"Khan\",\n\t\"Email\" : \"test2@test.com\",\n\t\"DateOfBirth\" : \"\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/accounts/tester/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"accounts",
+								"tester",
+								"profile"
+							]
+						},
+						"description": "Tests Performed:\n\n\t1: Other user (if user !exits : unautorised else forbidden)\n\t2: Get logged-on user profile\n\t3: Unlogged user"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiI3MDgwMTMxMi01NmY4LTRjMGQtOWFhYS02YzY5MWFjYTlkNGEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODAzNzM5MiwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.fALEVOuSRMkf6LblI4XcEyUEVy5_g6fgR8GbuvMzTk8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"FirstName\" : \"Mr\",\n\t\"LastName\" : \"One\",\n\t\"Email\" : \"Mrone@test.com\",\n\t\"DateOfBirth\" : \"1991-01-12\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/accounts/tester/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"accounts",
+								"tester",
+								"profile"
+							]
+						},
+						"description": "Tests Perfomred:\n\n\t1: Upadte other user profile\n\t2: Empty JSON\n\t3: Empty body\n\t4: Unlogged user\n\t5: One or more parameters values missing\n\t6: Parameter constaints"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
