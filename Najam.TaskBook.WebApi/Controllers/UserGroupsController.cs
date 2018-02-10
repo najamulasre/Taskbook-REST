@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Najam.TaskBook.Business;
 using Najam.TaskBook.Domain;
@@ -14,7 +11,7 @@ using Najam.TaskBook.WebApi.Parameters.UserGroups;
 namespace Najam.TaskBook.WebApi.Controllers
 {
     [Authorize]
-    [Route("api/accounts/{username}/groups")]
+    [Route("api/groups")]
     public class UserGroupsController : BaseController
     {
         private readonly IMapper _mapper;
@@ -33,17 +30,9 @@ namespace Najam.TaskBook.WebApi.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUserGroups(string userName)
+        public async Task<IActionResult> GetAllUserGroups()
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             UserGroup[] userGroups = await _taskBookBusiness.GetUserGroupsByUserId(loggedOnUser.Id);
 
@@ -53,17 +42,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{groupId}", Name = nameof(GetUserGroupById))]
-        public async Task<IActionResult> GetUserGroupById(string userName, Guid groupId)
+        public async Task<IActionResult> GetUserGroupById(Guid groupId)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             UserGroup userGroup = await _taskBookBusiness.GetUserGroupByGroupId(loggedOnUser.Id, groupId);
 
@@ -78,17 +59,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserGroup(string userName, [FromBody]CreateUserGroupParameters parameters)
+        public async Task<IActionResult> CreateUserGroup([FromBody]CreateUserGroupParameters parameters)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             if (!ModelState.IsValid)
             {
@@ -103,17 +76,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpPut("{groupId}")]
-        public async Task<IActionResult> UpdateUserGroup(string userName, Guid groupId, [FromBody]UpdateUserGroupParameters parameters)
+        public async Task<IActionResult> UpdateUserGroup(Guid groupId, [FromBody]UpdateUserGroupParameters parameters)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             if (!ModelState.IsValid)
             {
@@ -136,17 +101,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpDelete("{groupId}")]
-        public async Task<IActionResult> DeleteUserGroup(string userName, Guid groupId)
+        public async Task<IActionResult> DeleteUserGroup(Guid groupId)
         {
-            User user = await _identityBusiness.FindByNameAsync(userName);
-
-            if (user == null)
-                return NotFound();
-
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
-
-            if (user.Id != loggedOnUser.Id)
-                return Forbid();
 
             UserGroup groupToDelete = await _taskBookBusiness.GetUserGroupByGroupId(loggedOnUser.Id, groupId);
 

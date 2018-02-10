@@ -21,7 +21,7 @@ namespace Najam.TaskBook.Business
         {
             IQueryable<UserGroup> query = _dbContext.UserGroups
                 .Include(ug => ug.Group)
-                .Where(ug => ug.UserId == userId);
+                .Where(ug => ug.UserId == userId && ug.RelationType == UserGroupRelationType.Owner);
 
             return query.ToArrayAsync();
         }
@@ -30,7 +30,7 @@ namespace Najam.TaskBook.Business
         {
             IQueryable<UserGroup> query = _dbContext.UserGroups
                 .Include(ug => ug.Group)
-                .Where(ug => ug.UserId == userId && ug.GroupId == groupId);
+                .Where(ug => ug.UserId == userId && ug.GroupId == groupId && ug.RelationType == UserGroupRelationType.Owner);
 
             return query.SingleOrDefaultAsync();
         }
