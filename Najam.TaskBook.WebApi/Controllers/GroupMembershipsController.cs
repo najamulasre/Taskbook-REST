@@ -70,6 +70,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMembership(Guid groupId, [FromBody] CreateGroupMembershipParameters parameters)
         {
+            if (parameters == null)
+                return BadRequest();
+
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
             var loggedOnUserIsGroupOwner = await _taskBookBusiness.IsUserGroupOwner(loggedOnUser.Id, groupId);

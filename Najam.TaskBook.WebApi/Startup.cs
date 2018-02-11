@@ -63,7 +63,11 @@ namespace Najam.TaskBook.WebApi
         {
             services
                 .AddMvc()
-                .AddJsonOptions(opt => opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    opt.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                });
         }
 
         private void AddJwt(IServiceCollection services)

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Najam.TaskBook.Domain;
+using Najam.TaskBook.WebApi.Controllers;
 using Najam.TaskBook.WebApi.Models.GroupMemberships;
+using Najam.TaskBook.WebApi.Models.GroupTasks;
 using Najam.TaskBook.WebApi.Models.Profiles;
 using Najam.TaskBook.WebApi.Models.UserGroups;
 using Najam.TaskBook.WebApi.Models.UserMemberships;
@@ -31,6 +33,11 @@ namespace Najam.TaskBook.WebApi.Mappings
                 .ForMember(t => t.GroupName, opt => opt.MapFrom(s => s.Group.Name))
                 .ForMember(t => t.IsGroupActive, opt => opt.MapFrom(s => s.Group.IsActive))
                 .ForMember(t => t.MembershipType, opt => opt.MapFrom(s => s.RelationType.ToString()));
+
+            CreateMap<Task, TaskViewModel>()
+                .ForMember(t => t.GroupName, opt => opt.MapFrom(s => s.Group.Name))
+                .ForMember(t => t.CreatedBy, opt => opt.MapFrom(s => s.CreatedByUser.UserName))
+                .ForMember(t => t.AssignedTo, opt => opt.MapFrom(s => s.AssignedToUser == null ? null : s.AssignedToUser.UserName));
         }
     }
 }

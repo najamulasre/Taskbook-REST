@@ -12,9 +12,10 @@ using System;
 namespace Najam.TaskBook.Data.Migrations
 {
     [DbContext(typeof(TaskBookDbContext))]
-    partial class TaskBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180211131936_FixingTypeOnTaskOverdueColumn")]
+    partial class FixingTypeOnTaskOverdueColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

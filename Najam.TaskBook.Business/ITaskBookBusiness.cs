@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Najam.TaskBook.Domain;
+using Task = Najam.TaskBook.Domain.Task;
 
 
 namespace Najam.TaskBook.Business
 {
     public interface ITaskBookBusiness
     {
+        Task<DateTime> GetServerDateTime();
+
         Task<UserGroup[]> GetUserGroupsByUserId(Guid userId);
 
         Task<UserGroup> GetUserGroupByGroupId(Guid userId, Guid groupId);
@@ -28,5 +31,19 @@ namespace Najam.TaskBook.Business
         System.Threading.Tasks.Task DeleteGroupMembership(Guid userId, Guid groupId);
 
         Task<UserGroup[]> GetUserMemberships(Guid userId);
+
+        Task<bool> IsUserRelatedWithGroup(Guid userId, Guid groupId);
+
+        Task<Domain.Task[]> GetTasksByGroupId(Guid groupId);
+
+        Task<Domain.Task> GetTaskByTaskId(Guid taskId);
+
+        Task<Domain.Task> CreateGroupTask(Guid groupId, string title, string description, DateTime deadline, Guid createdByUserId);
+
+        Task<bool> IsUserTaskCreator(Guid userId, Guid taskId);
+
+        Task<Task> UpdateGroupTask(Guid taskId, string title, string description, DateTime deadline);
+
+        Task<bool> DeleteTask(Guid taskId);
     }
 }

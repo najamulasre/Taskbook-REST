@@ -12,9 +12,10 @@ using System;
 namespace Najam.TaskBook.Data.Migrations
 {
     [DbContext(typeof(TaskBookDbContext))]
-    partial class TaskBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180211094029_RenaingTaskToUserConstraintNames")]
+    partial class RenaingTaskToUserConstraintNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,7 +158,7 @@ namespace Najam.TaskBook.Data.Migrations
 
                     b.Property<Guid>("CreatedByUserId");
 
-                    b.Property<DateTime?>("DateTimeCompleted");
+                    b.Property<DateTime?>("DateCompleted");
 
                     b.Property<DateTime>("DateTimeCreated")
                         .ValueGeneratedOnAdd()
@@ -171,10 +172,6 @@ namespace Najam.TaskBook.Data.Migrations
                         .HasMaxLength(500);
 
                     b.Property<Guid>("GroupId");
-
-                    b.Property<bool>("IsOverdue")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasComputedColumnSql("case when DateTimeCompleted is null and Deadline < getdate() then cast(1 as bit) else cast(0 as bit) end");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -317,7 +314,7 @@ namespace Najam.TaskBook.Data.Migrations
                     b.HasOne("Najam.TaskBook.Domain.User", "AssignedToUser")
                         .WithMany("TasksAssigned")
                         .HasForeignKey("AssignedToUserId")
-                        .HasConstraintName("FK_Task_AspNetUsersAssignedToUserId");
+                        .HasConstraintName("FK_Task_AspNetUsers_AssignedToUserId");
 
                     b.HasOne("Najam.TaskBook.Domain.User", "CreatedByUser")
                         .WithMany("TasksCreated")

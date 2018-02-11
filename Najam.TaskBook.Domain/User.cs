@@ -14,6 +14,8 @@ namespace Najam.TaskBook.Domain
 
         public virtual ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
 
-        public virtual ICollection<Task> Tasks { get; set; } = new HashSet<Task>();
+        public virtual ICollection<Task> TasksAssigned { get; set; } = new HashSet<Task>();
+
+        public virtual ICollection<Task> TasksCreated { get; set; } = new HashSet<Task>();
     }
 }

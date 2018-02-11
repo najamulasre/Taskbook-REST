@@ -12,9 +12,10 @@ using System;
 namespace Najam.TaskBook.Data.Migrations
 {
     [DbContext(typeof(TaskBookDbContext))]
-    partial class TaskBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180211131351_AddingOverdueLogicToTaskEntity")]
+    partial class AddingOverdueLogicToTaskEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,7 +175,7 @@ namespace Najam.TaskBook.Data.Migrations
 
                     b.Property<bool>("IsOverdue")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasComputedColumnSql("case when DateTimeCompleted is null and Deadline < getdate() then cast(1 as bit) else cast(0 as bit) end");
+                        .HasComputedColumnSql("case when DateTimeCompleted is null and Deadline < getdate() then 1 else 0 end");
 
                     b.Property<string>("Title")
                         .IsRequired()

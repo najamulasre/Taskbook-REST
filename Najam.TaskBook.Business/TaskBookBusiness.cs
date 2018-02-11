@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Najam.TaskBook.Data;
 using Najam.TaskBook.Domain;
+using Task = Najam.TaskBook.Domain.Task;
 
 
 namespace Najam.TaskBook.Business
@@ -15,6 +16,18 @@ namespace Najam.TaskBook.Business
         public TaskBookBusiness(TaskBookDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<DateTime> GetServerDateTime()
+        {
+            using (var command = _dbContext.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = "select getdate()";
+                _dbContext.Database.OpenConnection();
+                object result = await command.ExecuteScalarAsync();
+
+                return (DateTime)result;
+            }
         }
 
         public Task<UserGroup[]> GetUserGroupsByUserId(Guid userId)
@@ -141,6 +154,87 @@ namespace Najam.TaskBook.Business
                 .Where(ug => ug.UserId == userId);
 
             return query.ToArrayAsync();
+        }
+
+        public Task<bool> IsUserRelatedWithGroup(Guid userId, Guid groupId)
+        {
+            return _dbContext.UserGroups
+                .AnyAsync(ug => ug.UserId == userId && ug.GroupId == groupId);
+        }
+
+        public Task<Task[]> GetTasksByGroupId(Guid groupId)
+        {
+            IQueryable<Task> query = _dbContext.Tasks
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser)
+                .Where(t => t.GroupId == groupId);
+
+            return query.ToArrayAsync();
+        }
+
+        public Task<Task> GetTaskByTaskId(Guid taskId)
+        {
+            IQueryable<Task> query = _dbContext.Tasks
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser)
+                .Where(t => t.Id == taskId);
+
+            return query.SingleOrDefaultAsync();
+        }
+
+        public async Task<Task> CreateGroupTask(Guid groupId, string title, string description, DateTime deadline, Guid createdByUserId)
+        {
+            var task = new Task
+            {
+                Id = Guid.NewGuid(),
+                GroupId = groupId,
+                Title = title,
+                Description = description,
+                Deadline = deadline,
+                CreatedByUserId = createdByUserId
+            };
+
+            _dbContext.Tasks.Add(task);
+            await _dbContext.SaveChangesAsync();
+
+            return task;
+        }
+
+        public Task<bool> IsUserTaskCreator(Guid userId, Guid taskId)
+        {
+            return _dbContext.Tasks.AnyAsync(t => t.Id == taskId && t.CreatedByUserId == userId);
+        }
+
+        public async Task<Task> UpdateGroupTask(Guid taskId, string title, string description, DateTime deadline)
+        {
+            Task task = await _dbContext.Tasks.FindAsync(taskId);
+
+            if (task == null)
+                return null;
+
+            task.Title = title;
+            task.Description = description;
+            task.Deadline = deadline;
+
+            await _dbContext.SaveChangesAsync();
+
+            return task;
+        }
+
+        public async Task<bool> DeleteTask(Guid taskId)
+        {
+            Task task = await _dbContext.Tasks.FindAsync(taskId);
+
+            if (task == null)
+                return false;
+
+            _dbContext.Tasks.Remove(task);
+
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }

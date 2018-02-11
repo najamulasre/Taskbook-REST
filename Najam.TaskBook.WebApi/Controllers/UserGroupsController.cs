@@ -61,6 +61,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUserGroup([FromBody]CreateUserGroupParameters parameters)
         {
+            if (parameters == null)
+                return BadRequest();
+
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
             if (!ModelState.IsValid)
@@ -78,6 +81,9 @@ namespace Najam.TaskBook.WebApi.Controllers
         [HttpPut("{groupId}")]
         public async Task<IActionResult> UpdateUserGroup(Guid groupId, [FromBody]UpdateUserGroupParameters parameters)
         {
+            if (parameters == null)
+                return BadRequest();
+
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
             if (!ModelState.IsValid)
