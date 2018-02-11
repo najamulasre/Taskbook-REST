@@ -765,6 +765,40 @@
 			"name": "Group Memberships",
 			"item": [
 				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get by UserName",
 					"request": {
 						"auth": {
@@ -800,40 +834,6 @@
 					"response": []
 				},
 				{
-					"name": "Get All",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"groups",
-								"{{manglaGroupId}}",
-								"memberships"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Create Membership",
 					"request": {
 						"auth": {
@@ -855,17 +855,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userName\" : \"{{user2}}\"\n}"
+							"raw": "{\n    \"userName\" : \"{{user1}}\"\n}"
 						},
 						"url": {
-							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships",
+							"raw": "{{url}}/api/groups/d3838c67-f938-4b05-8b81-2dfa29f8f18f/memberships",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"groups",
-								"{{manglaGroupId}}",
+								"d3838c67-f938-4b05-8b81-2dfa29f8f18f",
 								"memberships"
 							]
 						}
@@ -892,16 +892,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships/{{user2}}",
+							"raw": "{{url}}/api/groups/d3838c67-f938-4b05-8b81-2dfa29f8f18f/memberships/{{user1}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"groups",
-								"{{manglaGroupId}}",
+								"d3838c67-f938-4b05-8b81-2dfa29f8f18f",
 								"memberships",
-								"{{user2}}"
+								"{{user1}}"
 							]
 						}
 					},
@@ -937,6 +937,258 @@
 							"path": [
 								"api",
 								"memberships"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Group Tasks",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Group Tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"tasks"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/tasks/4baecaeb-8bf7-4a1b-9ce7-ca443f9581d8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"tasks",
+								"4baecaeb-8bf7-4a1b-9ce7-ca443f9581d8"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Group Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"### DDDOOO EEEXXXX RRRAAAYYY\",\n    \"deadline\": \"2018-02-28T13:00:00\",\n    \"description\": \"DO XRAY PLEASE\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/groups/d3838c67-f938-4b05-8b81-2dfa29f8f18f/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"d3838c67-f938-4b05-8b81-2dfa29f8f18f",
+								"tasks"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Group Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Pay Electric Bill\",\n    \"deadline\": \"2018-02-28T13:00:00\",\n    \"description\": \"Pleae pay the electric bill. I will transfer money in to your account\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/tasks/54cc8031-d57c-4f02-acb7-3ff7de902122",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"tasks",
+								"54cc8031-d57c-4f02-acb7-3ff7de902122"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Group Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/tasks/01f77193-bb83-4eae-83fa-15be53dada46",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"tasks",
+								"01f77193-bb83-4eae-83fa-15be53dada46"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Tasks",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All User Tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/tasks/cc3de75b-5ed1-476b-84fa-4b5fe56886e7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"cc3de75b-5ed1-476b-84fa-4b5fe56886e7"
 							]
 						},
 						"description": ""
