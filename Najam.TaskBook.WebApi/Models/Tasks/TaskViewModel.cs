@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Najam.TaskBook.WebApi.Models.GroupTasks
+namespace Najam.TaskBook.WebApi.Models.Tasks
 {
     public class TaskViewModel
     {

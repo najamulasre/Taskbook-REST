@@ -199,7 +199,7 @@ namespace Najam.TaskBook.Business
             _dbContext.Tasks.Add(task);
             await _dbContext.SaveChangesAsync();
 
-            return task;
+            return await GetTaskByTaskId(task.Id);
         }
 
         public Task<bool> IsUserTaskCreator(Guid userId, Guid taskId)
@@ -235,6 +235,31 @@ namespace Najam.TaskBook.Business
             await _dbContext.SaveChangesAsync();
 
             return true;
+        }
+
+        public Task<Task[]> GetUsersTaskByUserId(Guid userId)
+        {
+            IQueryable<Task> query = _dbContext.UserGroups
+                .Where(g => g.UserId == userId)
+                .SelectMany(g => g.Group.Tasks)
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser);
+
+            return query.ToArrayAsync();
+        }
+
+        public Task<Task> GetUsersTaskByUserAndTaskId(Guid userId, Guid taskId)
+        {
+            IQueryable<Task> query = _dbContext.UserGroups
+                .Where(g => g.UserId == userId)
+                .SelectMany(g => g.Group.Tasks)
+                .Where(t => t.Id == taskId)
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser);
+
+            return query.SingleOrDefaultAsync();
         }
     }
 }

@@ -2,8 +2,8 @@
 using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Controllers;
 using Najam.TaskBook.WebApi.Models.GroupMemberships;
-using Najam.TaskBook.WebApi.Models.GroupTasks;
 using Najam.TaskBook.WebApi.Models.Profiles;
+using Najam.TaskBook.WebApi.Models.Tasks;
 using Najam.TaskBook.WebApi.Models.UserGroups;
 using Najam.TaskBook.WebApi.Models.UserMemberships;
 using Najam.TaskBook.WebApi.Parameters.Profiles;

@@ -45,5 +45,9 @@ namespace Najam.TaskBook.Business
         Task<Task> UpdateGroupTask(Guid taskId, string title, string description, DateTime deadline);
 
         Task<bool> DeleteTask(Guid taskId);
+
+        Task<Task[]> GetUsersTaskByUserId(Guid userId);
+
+        Task<Task> GetUsersTaskByUserAndTaskId(Guid userId, Guid taskId);
     }
 }

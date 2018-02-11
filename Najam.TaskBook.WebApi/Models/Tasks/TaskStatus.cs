@@ -1,4 +1,4 @@
-﻿namespace Najam.TaskBook.WebApi.Models.GroupTasks
+﻿namespace Najam.TaskBook.WebApi.Models.Tasks
 {
     public enum TaskStatus
     {

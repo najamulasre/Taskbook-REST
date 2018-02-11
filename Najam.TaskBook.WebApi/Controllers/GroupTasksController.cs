@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Najam.TaskBook.Business;
 using Najam.TaskBook.Domain;
-using Najam.TaskBook.WebApi.Models.GroupTasks;
+using Najam.TaskBook.WebApi.Models.Tasks;
 using Najam.TaskBook.WebApi.Parameters.GroupTasks;
 using Task = Najam.TaskBook.Domain.Task;
 
