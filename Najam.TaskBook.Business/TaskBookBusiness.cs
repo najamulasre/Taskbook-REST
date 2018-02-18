@@ -275,7 +275,8 @@ namespace Najam.TaskBook.Business
                 .Include(t => t.Group)
                 .Include(t => t.CreatedByUser)
                 .Include(t => t.AssignedToUser)
-                .Where(t => t.AssignedToUserId.HasValue && !t.DateTimeCompleted.HasValue);
+                .Where(t => t.AssignedToUserId.HasValue && !t.DateTimeCompleted.HasValue)
+                .OrderBy(t => t.Deadline);
 
             return query.ToArrayAsync();
         }
@@ -318,10 +319,6 @@ namespace Najam.TaskBook.Business
 
             return true;
         }
-
-
-
-
 
         public Task<Task[]> GetUsersTaskCompletionsByUserId(Guid userId)
         {
