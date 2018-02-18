@@ -4,6 +4,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +47,7 @@ namespace Najam.TaskBook.WebApi
 
             AddMvc(services);
 
+            AddUrlHelper(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,13 +74,24 @@ namespace Najam.TaskBook.WebApi
                 });
         }
 
+        private void AddUrlHelper(IServiceCollection services)
+        {
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
+            services.AddScoped<IUrlHelper, UrlHelper>(factory =>
+            {
+                var contextAccessor = factory.GetService<IActionContextAccessor>();
+                return new UrlHelper(contextAccessor.ActionContext);
+            });
+        }
+
         private void AddJwt(IServiceCollection services)
         {
-            var jwtConfigSection = Configuration.GetSection("JWT");
+            IConfigurationSection jwtConfigSection = Configuration.GetSection("JWT");
             services.Configure<JwtConfigOptions>(jwtConfigSection);
 
-            var serviceProvider = services.BuildServiceProvider();
-            var jwtOptions = serviceProvider.GetService<IOptions<JwtConfigOptions>>().Value;
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
+            JwtConfigOptions jwtOptions = serviceProvider.GetService<IOptions<JwtConfigOptions>>().Value;
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 

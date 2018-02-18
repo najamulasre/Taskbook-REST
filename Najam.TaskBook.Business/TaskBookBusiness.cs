@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Najam.TaskBook.Business.Parameters;
+using Najam.TaskBook.Business.Dtos;
 using Najam.TaskBook.Data;
 using Najam.TaskBook.Domain;
 using Task = Najam.TaskBook.Domain.Task;
@@ -242,14 +242,18 @@ namespace Najam.TaskBook.Business
             return true;
         }
 
-        public Task<Task[]> GetUsersTaskByUserId(Guid userId, GetUserTasksParameters parameters)
+        public async Task<UserTaskPage> GetUsersTaskByUserId(Guid userId, GetUserTasksParameters parameters)
         {
             int skip = (parameters.PageNumber - 1) * parameters.PageSize;
             int take = parameters.PageSize;
 
             IQueryable<Task> query = _dbContext.UserGroups
                 .Where(g => g.UserId == userId)
-                .SelectMany(g => g.Group.Tasks)
+                .SelectMany(g => g.Group.Tasks);
+
+            int totalCount = query.Count();
+
+            query = query
                 .Include(t => t.Group)
                 .Include(t => t.CreatedByUser)
                 .Include(t => t.AssignedToUser)
@@ -257,7 +261,11 @@ namespace Najam.TaskBook.Business
                 .Skip(skip)
                 .Take(take);
 
-            return query.ToArrayAsync();
+            Task[] tasks = await query.ToArrayAsync();
+
+            var page = new UserTaskPage(parameters.PageNumber, parameters.PageSize, totalCount, tasks);
+
+            return page;
         }
 
         public Task<Task> GetUsersTaskByUserAndTaskId(Guid userId, Guid taskId)

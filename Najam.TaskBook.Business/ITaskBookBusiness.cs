@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Najam.TaskBook.Business.Parameters;
+using Najam.TaskBook.Business.Dtos;
 using Najam.TaskBook.Domain;
 using Task = Najam.TaskBook.Domain.Task;
 
@@ -47,7 +47,7 @@ namespace Najam.TaskBook.Business
 
         Task<bool> DeleteTask(Guid taskId);
 
-        Task<Task[]> GetUsersTaskByUserId(Guid userId, GetUserTasksParameters parameters);
+        Task<UserTaskPage> GetUsersTaskByUserId(Guid userId, GetUserTasksParameters parameters);
 
         Task<Task> GetUsersTaskByUserAndTaskId(Guid userId, Guid taskId);
 

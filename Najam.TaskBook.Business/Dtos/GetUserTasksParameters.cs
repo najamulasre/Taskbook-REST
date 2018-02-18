@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Najam.TaskBook.Business.Parameters
+namespace Najam.TaskBook.Business.Dtos
 {
     public class GetUserTasksParameters
     {
