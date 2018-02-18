@@ -47,7 +47,7 @@
 								""
 							]
 						},
-						"description": "Tests Performed\n\n\t1:\tWithout one or more parameters\n\t2:\tlength test for each parameter\n\t3:\tWrong email format (Doesn't check for dot)\n\t4:\tPassword without numeric value\n\t5:\tPassword without non-numeric value\n\t6:\tDifferent value for password and Confirm password \n\t7:\tDuplicate account\n\t9:\tEmpty JSON\n\t10: Empty body"
+						"description": "Tests Performed:\n\n\t1:\tWithout one or more parameters\n\t2:\tlength test for each parameter\n\t3:\tWrong email format (Doesn't check for dot)\n\t4:\tPassword without numeric value\n\t5:\tPassword without non-numeric value\n\t6:\tDifferent value for password and Confirm password \n\t7:\tDuplicate account\n\t9:\tEmpty JSON\n\t10: Empty body"
 					},
 					"response": []
 				},
@@ -194,7 +194,7 @@
 		},
 		{
 			"name": "Credentials Testing",
-			"description": "Tests Performed:\n\n\t1:  Without CurrentPassword parameter\n\t2:  Without NewPassword or ConfirmPassword (missing parameter required and passwords doesn't match)\n\t3:  Empty JSON\n\t4:  Empty body\n\t5:  Password mismatch\n\t6:  Length\n\t7:  Password without Captial alphabet\n\t8:  Password without numeric value\n\t9:  Password without spcial character\n\t10: Update Credentail with same parameters/value\t",
+			"description": "",
 			"item": [
 				{
 					"name": "Update Paword Tests",
@@ -234,7 +234,7 @@
 								"credentials"
 							]
 						},
-						"description": ""
+						"description": "Tests Performed:\n\n\t1: Without login\n\t2: Without CurrentPassword parameter\n\t3: Without NewPassword or ConfirmPassword \n\t4: With empty JSON\n\t5: With empty body\n\t6: With Password mismatch\n\t7: Without follwing parameters constraints \n\t8: Update credentail with same request/parameters"
 					},
 					"response": []
 				}
@@ -267,14 +267,14 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Get profile",
+					"name": "Get profile Tests",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiJkZjUyOGYzMS0xNzI5LTRmNTEtYTdiMC1mZDdmMzUwMTFjZGYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODAzNjQzNSwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.rv8OJ0KspGoyQ2aDBf6eRK7xroC5c0EXtFvnhbsvThI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiJlMzJkMjU4Mi0wZmExLTQ0NjYtOWY1My04NzRlMzY5N2Q0ODUiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODYzNDg3MCwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.hr0HqBGdIEHiEoFMndMkILphad_oM5HVmluy_q2NZJs",
 									"type": "string"
 								}
 							]
@@ -304,12 +304,12 @@
 								"profile"
 							]
 						},
-						"description": "Tests Performed:\n\n\t1: Other user (if user !exits : unautorised else forbidden)\n\t2: Get logged-on user profile\n\t3: Unlogged user"
+						"description": "Tests Performed:\n\n\t1: Withot login"
 					},
 					"response": []
 				},
 				{
-					"name": "Update Profile",
+					"name": "Update Profile Tests",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -346,7 +346,236 @@
 								"profile"
 							]
 						},
-						"description": "Tests Perfomred:\n\n\t1: Upadte other user profile\n\t2: Empty JSON\n\t3: Empty body\n\t4: Unlogged user\n\t5: One or more parameters values missing\n\t6: Parameter constaints"
+						"description": "Tests Perfomred:\n\n\t1: Without login\n\t2: With empty JSON\n\t3: With empty body\n\t4: Without one or more parameters\n\t5: Without one or more parameters values\n\t6: With different dateOfBirth values \n\t7: Without following Parameter constraints"
+					},
+					"response": []
+				},
+				{
+					"name": "Partail Profile update Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiIyNmViNTRlMC0xMzNlLTQ5YTMtYjQ4NC1mNmNkMjA5ZjZjNTciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODYzNDAwMywiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.HA1RQgJwS6lDxb_URdfgYRqrPpWpVh1zkbACC79xIU0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{ \"op\": \"replace\", \"path\": \"/firstName\", \"value\": \"mr\" },\n\t{ \"op\": \"replace\", \"path\": \"/email\", \"value\": \"mr-tester-one@test\" },\n\t{ \"op\": \"replace\", \"path\": \"/lastName\", \"value\": \"tester-one\"},\n\t{ \"op\": \"replace\", \"path\": \"/dateOfBirth\", \"value\": \"2000-01-12\"}\n]"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/accounts/tester/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"accounts",
+								"tester",
+								"profile"
+							]
+						},
+						"description": "Test Performed:\n\t\n\t1:\tWithout Login\n\t2:\tWith empty body\n\t3:\tWith empty array\n\t4:\tWithout '@' in email\n\t5:\tWithout '.' in email (Update email)\n\t6:  Without VALUE attribut\n\t7:\tWithout VALUE attribute value\n\t8:\tWithout path attribute\n\t9:\tWithout path attribute value\n\t10:\tWithout op attribute (Still update profile)\n\t11:\tWithout op attribute value\n\t12: Update all attributes\n\t13: Updating few attributes "
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Groups Testing",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Users Groups Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiI1OWZkNWE3MC1mYjI5LTRkYjctOTA4NS1hNGY5ZjgxYzI2ODkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODY0MDU1MywiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.fIzONnNiombBO1JObAbsuSxGN8DkIeMswusYpKhcsR4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50992/api/groups/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"groups",
+								""
+							]
+						},
+						"description": "Tests Perfomed:\n\t\n\t1: Without Login"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Group by Id Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiI1OWZkNWE3MC1mYjI5LTRkYjctOTA4NS1hNGY5ZjgxYzI2ODkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODY0MDU1MywiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.fIzONnNiombBO1JObAbsuSxGN8DkIeMswusYpKhcsR4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50992/api/groups/a794dbc8-584f-401a-8a66-01e4eb33b31d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"groups",
+								"a794dbc8-584f-401a-8a66-01e4eb33b31d"
+							]
+						},
+						"description": "Tests Performed:\n\n\t1: Without Login\n\t2: With wrong Group ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Groups Test",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiIzNzhiOWRkZi1lZWVmLTQxZWEtOGRjOC04OTAzMWY1M2RhYzMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODYzOTk1NCwiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.cMiKnlbF_QI40mmwdqZvaHHIWAkuWE58zyOueUz94Kc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"GroupName\": \"User Test Group\",\n\t\"IsActive\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/groups/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"groups",
+								""
+							]
+						},
+						"description": "Tests Performed\n\n\t1: With emoty body\n\t2: With empty JSON\n\t3: Without GroupName value\n\t4: Without isActive parameter (Creates group with 'false')\n\t5: Without Login\n\t6: Without isActive value\n\t7: Without isActive parameter \n\t8: With already created group request (Create duplicate)  "
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Group Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiI1OWZkNWE3MC1mYjI5LTRkYjctOTA4NS1hNGY5ZjgxYzI2ODkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODY0MDU1MywiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.fIzONnNiombBO1JObAbsuSxGN8DkIeMswusYpKhcsR4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50992/api/groups/a794dbc8-584f-401a-8a66-01e4eb33b31d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"groups",
+								"a794dbc8-584f-401a-8a66-01e4eb33b31d"
+							]
+						},
+						"description": "Tests Performed:\n\n\t1: Without Login\n\t2: With empty body\n\t3: With empty JSON\n\t4: Without groupName value\n\t5: Without groupName parameter\n\t6: Without isActive value \n\t7: Without isActive parameter (Update group with 'false')"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Group Tests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXIiLCJqdGkiOiI1OWZkNWE3MC1mYjI5LTRkYjctOTA4NS1hNGY5ZjgxYzI2ODkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA2N2IwNGVmLTJkMGMtZTgxMS1iMWFiLThjZGNkNGQ2ZGY2OSIsImV4cCI6MTUxODY0MDU1MywiaXNzIjoibmFqYW0uY28udWsiLCJhdWQiOiJuYWphbS5jby51ayJ9.fIzONnNiombBO1JObAbsuSxGN8DkIeMswusYpKhcsR4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50992/api/groups/e29a5ef8-0307-4e33-86d0-c195e51ef55c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50992",
+							"path": [
+								"api",
+								"groups",
+								"e29a5ef8-0307-4e33-86d0-c195e51ef55c"
+							]
+						},
+						"description": "Tests Performed:\n\n\t1: Without login\n\t2: With wrong Group ID\n\t3: With group ID of already deleted group"
 					},
 					"response": []
 				}
