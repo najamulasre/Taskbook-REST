@@ -26,7 +26,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUserTaskAssignmentss()
+        public async Task<IActionResult> GetAllUserTaskAssignments()
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
@@ -52,26 +52,34 @@ namespace Najam.TaskBook.WebApi.Controllers
             return Ok(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateTaskAssignment([FromBody] CreateTaskAssignmentParameters parameters)
+        [HttpPut("{taskId}")]
+        public async Task<IActionResult> CreateTaskAssignment(Guid? taskId)
         {
-            if (parameters == null)
+            if (!taskId.HasValue)
                 return BadRequest();
-
-            if (!ModelState.IsValid || !parameters.TaskId.HasValue)
-                return UnprocessableEntity(ModelState);
 
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task userTask = await _taskBookBusiness.GetUsersTaskByUserAndTaskId(loggedOnUser.Id, parameters.TaskId.Value);
+            Domain.Task userTask = await _taskBookBusiness.GetUsersTaskByUserAndTaskId(loggedOnUser.Id, taskId.Value);
 
             if (userTask == null)
                 return NotFound();
 
             if (userTask.AssignedToUserId.HasValue)
-                return Conflict("Task has already been assigned.");
+            {
+                if (userTask.AssignedToUserId != loggedOnUser.Id)
+                    return Conflict("Task has already been assigned to a different assignee.");
 
-            Domain.Task assignedTask = await _taskBookBusiness.AssignTask(loggedOnUser.Id, parameters.TaskId.Value);
+                if (userTask.DateTimeCompleted.HasValue)
+                    return Conflict("Cannot create task assignment for a completed task.");
+
+                Domain.Task existing = await _taskBookBusiness.GetUsersTaskAssignmentByUserAndTaskId(loggedOnUser.Id, taskId.Value);
+                var existingModel = _mapper.Map<TaskViewModel>(existing);
+
+                return Ok(existingModel);
+            }
+
+            Domain.Task assignedTask = await _taskBookBusiness.CreateTaskAssignmen(loggedOnUser.Id, taskId.Value);
 
             var model = _mapper.Map<TaskViewModel>(assignedTask);
 
@@ -91,7 +99,7 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (assignedTask.AssignedToUserId != loggedOnUser.Id)
                 return Forbid();
 
-            bool deleted = await _taskBookBusiness.UnassignTask(taskId);
+            bool deleted = await _taskBookBusiness.DeleteTaskAssignment(taskId);
 
             if (!deleted)
                 return NotFound();

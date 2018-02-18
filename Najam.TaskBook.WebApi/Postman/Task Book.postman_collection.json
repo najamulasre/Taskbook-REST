@@ -1196,6 +1196,277 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Task Assignments",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Task Assignments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/taskAssignments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskAssignments"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task Assignment By TaskID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/taskAssignments/54cc8031-d57c-4f02-acb7-3ff7de902122",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskAssignments",
+								"54cc8031-d57c-4f02-acb7-3ff7de902122"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task Assignemnt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/taskAssignments/cc3de75b-5ed1-476b-84fa-4b5fe56886e7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskAssignments",
+								"cc3de75b-5ed1-476b-84fa-4b5fe56886e7"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task Assignment By TaskID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/taskAssignments/54cc8031-d57c-4f02-acb7-3ff7de902122",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskAssignments",
+								"54cc8031-d57c-4f02-acb7-3ff7de902122"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task Completion",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Task Completions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/taskCompletions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskCompletions"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task Completion By TaskID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/taskCompletions/54cc8031-d57c-4f02-acb7-3ff7de902122",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskCompletions",
+								"54cc8031-d57c-4f02-acb7-3ff7de902122"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task Completion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/taskCompletions/cc3de75b-5ed1-476b-84fa-4b5fe56886e7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskCompletions",
+								"cc3de75b-5ed1-476b-84fa-4b5fe56886e7"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task Completions By TaskID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/taskCompletions/cc3de75b-5ed1-476b-84fa-4b5fe56886e7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"taskCompletions",
+								"cc3de75b-5ed1-476b-84fa-4b5fe56886e7"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

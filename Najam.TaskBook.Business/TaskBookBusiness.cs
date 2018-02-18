@@ -289,7 +289,7 @@ namespace Najam.TaskBook.Business
             return query.SingleOrDefaultAsync();
         }
 
-        public async Task<Task> AssignTask(Guid assignToUserId, Guid taskId)
+        public async Task<Task> CreateTaskAssignmen(Guid assignToUserId, Guid taskId)
         {
             Task task = _dbContext.Tasks.Find(taskId);
             task.AssignedToUserId = assignToUserId;
@@ -299,7 +299,7 @@ namespace Najam.TaskBook.Business
             return await GetUsersTaskAssignmentByUserAndTaskId(assignToUserId, taskId);
         }
 
-        public async Task<bool> UnassignTask(Guid taskId)
+        public async Task<bool> DeleteTaskAssignment(Guid taskId)
         {
             Task task = _dbContext.Tasks.Find(taskId);
 
@@ -308,6 +308,60 @@ namespace Najam.TaskBook.Business
 
             task.AssignedToUserId = null;
             task.DateTimeAssigned = null;
+
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+
+
+
+
+        public Task<Task[]> GetUsersTaskCompletionsByUserId(Guid userId)
+        {
+            IQueryable<Task> query = _dbContext.UserGroups
+                .Where(g => g.UserId == userId)
+                .SelectMany(g => g.Group.Tasks)
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser)
+                .Where(t => t.DateTimeCompleted.HasValue);
+
+            return query.ToArrayAsync();
+        }
+
+        public Task<Task> GetUsersTaskCompletionByUserAndTaskId(Guid userId, Guid taskId)
+        {
+            IQueryable<Task> query = _dbContext.UserGroups
+                .Where(g => g.UserId == userId)
+                .SelectMany(g => g.Group.Tasks)
+                .Where(t => t.Id == taskId)
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser)
+                .Where(t => t.DateTimeCompleted.HasValue);
+
+            return query.SingleOrDefaultAsync();
+        }
+
+        public async Task<Task> CreateTaskCompletion(Guid assignToUserId, Guid taskId)
+        {
+            Task task = _dbContext.Tasks.Find(taskId);
+            task.DateTimeCompleted = DateTime.Now;
+
+            await _dbContext.SaveChangesAsync();
+            return await GetUsersTaskCompletionByUserAndTaskId(assignToUserId, taskId);
+        }
+
+        public async Task<bool> DeleteTaskCompletion(Guid taskId)
+        {
+            Task task = _dbContext.Tasks.Find(taskId);
+
+            if (task == null)
+                return false;
+
+            task.DateTimeCompleted = null;
 
             await _dbContext.SaveChangesAsync();
 

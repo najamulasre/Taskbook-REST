@@ -20,7 +20,7 @@ namespace Najam.TaskBook.WebApi.Models.Tasks
 
         public DateTime Deadline { get; set; }
 
-        public DateTime? DateCompleted { get; set; }
+        public DateTime? DateTimeCompleted { get; set; }
 
         public bool IsOverdue { get; set; }
 
@@ -32,7 +32,7 @@ namespace Najam.TaskBook.WebApi.Models.Tasks
 
         private TaskStatus CalculateStatus()
         {
-            if (DateCompleted.HasValue)
+            if (DateTimeCompleted.HasValue)
                 return TaskStatus.Completed;
 
             if (!string.IsNullOrWhiteSpace(AssignedTo))
