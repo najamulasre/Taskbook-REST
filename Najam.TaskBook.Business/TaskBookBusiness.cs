@@ -108,7 +108,8 @@ namespace Najam.TaskBook.Business
             IQueryable<UserGroup> query = _dbContext.UserGroups
                 .Include(ug => ug.Group)
                 .Include(ug => ug.User)
-                .Where(ug => ug.GroupId == groupId && ug.RelationType == UserGroupRelationType.Member);
+                .Where(ug => ug.GroupId == groupId && ug.RelationType == UserGroupRelationType.Member)
+                .OrderBy(ug => ug.User.UserName);
 
             return query.ToArrayAsync();
         }
