@@ -248,7 +248,8 @@ namespace Najam.TaskBook.Business
                 .SelectMany(g => g.Group.Tasks)
                 .Include(t => t.Group)
                 .Include(t => t.CreatedByUser)
-                .Include(t => t.AssignedToUser);
+                .Include(t => t.AssignedToUser)
+                .OrderBy(t => t.Deadline);
 
             return query.ToArrayAsync();
         }
