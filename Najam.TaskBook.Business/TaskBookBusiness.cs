@@ -328,7 +328,8 @@ namespace Najam.TaskBook.Business
                 .Include(t => t.Group)
                 .Include(t => t.CreatedByUser)
                 .Include(t => t.AssignedToUser)
-                .Where(t => t.DateTimeCompleted.HasValue);
+                .Where(t => t.DateTimeCompleted.HasValue)
+                .OrderByDescending(t => t.DateTimeCompleted);
 
             return query.ToArrayAsync();
         }
