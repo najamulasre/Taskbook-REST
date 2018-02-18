@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Najam.TaskBook.Business.Parameters;
 using Najam.TaskBook.Data;
 using Najam.TaskBook.Domain;
 using Task = Najam.TaskBook.Domain.Task;
@@ -241,15 +242,20 @@ namespace Najam.TaskBook.Business
             return true;
         }
 
-        public Task<Task[]> GetUsersTaskByUserId(Guid userId)
+        public Task<Task[]> GetUsersTaskByUserId(Guid userId, GetUserTasksParameters parameters)
         {
+            int skip = (parameters.PageNumber - 1) * parameters.PageSize;
+            int take = parameters.PageSize;
+
             IQueryable<Task> query = _dbContext.UserGroups
                 .Where(g => g.UserId == userId)
                 .SelectMany(g => g.Group.Tasks)
                 .Include(t => t.Group)
                 .Include(t => t.CreatedByUser)
                 .Include(t => t.AssignedToUser)
-                .OrderBy(t => t.Deadline);
+                .OrderBy(t => t.Deadline)
+                .Skip(skip)
+                .Take(take);
 
             return query.ToArrayAsync();
         }

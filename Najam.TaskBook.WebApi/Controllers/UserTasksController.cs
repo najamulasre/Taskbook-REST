@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Najam.TaskBook.Business;
+using Najam.TaskBook.Business.Parameters;
 using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.Tasks;
 using Task = Najam.TaskBook.Domain.Task;
@@ -15,7 +13,7 @@ namespace Najam.TaskBook.WebApi.Controllers
 {
     [Authorize]
     [Route("api/tasks")]
-    public class UserTasksController : Controller
+    public class UserTasksController : BaseController
     {
         private readonly IIdentityBusiness _identityBusiness;
         private readonly ITaskBookBusiness _taskBookBusiness;
@@ -29,11 +27,17 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUserTasks()
+        public async Task<IActionResult> GetAllUserTasks(GetUserTasksParameters parameters)
         {
+            if (parameters == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Task[] userTasks = await _taskBookBusiness.GetUsersTaskByUserId(loggedOnUser.Id);
+            Task[] userTasks = await _taskBookBusiness.GetUsersTaskByUserId(loggedOnUser.Id, parameters);
 
             var models = _mapper.Map<TaskViewModel[]>(userTasks);
 

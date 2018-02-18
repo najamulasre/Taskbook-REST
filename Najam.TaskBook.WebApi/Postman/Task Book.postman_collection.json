@@ -1165,6 +1165,48 @@
 					"response": []
 				},
 				{
+					"name": "Get All User Tasks - Paged",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/tasks?pageNumber=1&pageSize=3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"equals": true
+								},
+								{
+									"key": "pageSize",
+									"value": "3",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Get User Task",
 					"request": {
 						"auth": {
