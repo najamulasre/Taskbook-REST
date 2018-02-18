@@ -171,7 +171,8 @@ namespace Najam.TaskBook.Business
                 .Include(t => t.Group)
                 .Include(t => t.CreatedByUser)
                 .Include(t => t.AssignedToUser)
-                .Where(t => t.GroupId == groupId);
+                .Where(t => t.GroupId == groupId)
+                .OrderBy(t => t.Deadline);
 
             return query.ToArrayAsync();
         }
