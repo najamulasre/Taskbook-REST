@@ -18,6 +18,8 @@ namespace Najam.TaskBook.Domain
 
         public bool IsOverdue { get; set; }
 
+        public DateTime? DateTimeAssigned { get; set; }
+
         public Guid? AssignedToUserId { get; set; }
 
         public virtual User AssignedToUser { get; set; }

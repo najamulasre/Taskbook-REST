@@ -28,6 +28,8 @@ namespace Najam.TaskBook.WebApi.Models.Tasks
 
         public string AssignedTo { get; set; }
 
+        public DateTime? DateTimeAssigned { get; set; }
+
         private TaskStatus CalculateStatus()
         {
             if (DateCompleted.HasValue)

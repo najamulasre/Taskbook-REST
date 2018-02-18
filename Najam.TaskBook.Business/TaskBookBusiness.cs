@@ -261,5 +261,57 @@ namespace Najam.TaskBook.Business
 
             return query.SingleOrDefaultAsync();
         }
+
+        public Task<Task[]> GetUsersTaskAssignmentsByUserId(Guid userId)
+        {
+            IQueryable<Task> query = _dbContext.UserGroups
+                .Where(g => g.UserId == userId)
+                .SelectMany(g => g.Group.Tasks)
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser)
+                .Where(t => t.AssignedToUserId.HasValue && !t.DateTimeCompleted.HasValue);
+
+            return query.ToArrayAsync();
+        }
+
+        public Task<Task> GetUsersTaskAssignmentByUserAndTaskId(Guid userId, Guid taskId)
+        {
+            IQueryable<Task> query = _dbContext.UserGroups
+                .Where(g => g.UserId == userId)
+                .SelectMany(g => g.Group.Tasks)
+                .Where(t => t.Id == taskId)
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser)
+                .Where(t => t.AssignedToUserId.HasValue && !t.DateTimeCompleted.HasValue);
+
+            return query.SingleOrDefaultAsync();
+        }
+
+        public async Task<Task> AssignTask(Guid assignToUserId, Guid taskId)
+        {
+            Task task = _dbContext.Tasks.Find(taskId);
+            task.AssignedToUserId = assignToUserId;
+            task.DateTimeAssigned = DateTime.Now;
+
+            await _dbContext.SaveChangesAsync();
+            return await GetUsersTaskAssignmentByUserAndTaskId(assignToUserId, taskId);
+        }
+
+        public async Task<bool> UnassignTask(Guid taskId)
+        {
+            Task task = _dbContext.Tasks.Find(taskId);
+
+            if (task == null)
+                return false;
+
+            task.AssignedToUserId = null;
+            task.DateTimeAssigned = null;
+
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

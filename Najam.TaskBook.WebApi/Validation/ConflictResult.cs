@@ -4,11 +4,11 @@ namespace Najam.TaskBook.WebApi.Validation
 {
     public class ConflictResult : ObjectResult
     {
-        private const int UnprocessableEntityStatusCode = 409;
+        private const int ConflictStatusCode = 409;
 
         public ConflictResult(string message = "Conflict") : base(new {Reason = message})
         {
-            StatusCode = UnprocessableEntityStatusCode;
+            StatusCode = ConflictStatusCode;
         }
     }
 }

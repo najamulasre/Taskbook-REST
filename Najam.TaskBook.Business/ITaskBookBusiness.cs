@@ -49,5 +49,13 @@ namespace Najam.TaskBook.Business
         Task<Task[]> GetUsersTaskByUserId(Guid userId);
 
         Task<Task> GetUsersTaskByUserAndTaskId(Guid userId, Guid taskId);
+
+        Task<Task[]> GetUsersTaskAssignmentsByUserId(Guid userId);
+
+        Task<Task> GetUsersTaskAssignmentByUserAndTaskId(Guid userId, Guid taskId);
+
+        Task<Task> AssignTask(Guid assignToUserId, Guid taskId);
+
+        Task<bool> UnassignTask(Guid taskId);
     }
 }
