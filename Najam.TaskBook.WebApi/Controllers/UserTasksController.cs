@@ -57,14 +57,16 @@ namespace Najam.TaskBook.WebApi.Controllers
             var metaData = new
             {
                 taskPage.TotalCount,
+                taskPage.PageSize,
                 taskPage.TotalPages,
                 taskPage.CurrentPage,
-                taskPage.PageSize,
                 previousPageLink,
                 nextPageLink
             };
 
-            Response.Headers.Add("X-PagingMetadata", JsonConvert.SerializeObject(metaData));
+            string pagingMetaDataJson = JsonConvert.SerializeObject(metaData);
+
+            Response.Headers.Add("X-PagingMetadata", pagingMetaDataJson);
 
             var models = _mapper.Map<TaskViewModel[]>(taskPage.Tasks);
 
