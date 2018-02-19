@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Najam.TaskBook.WebApi.Validation;
 
@@ -10,7 +9,5 @@ namespace Najam.TaskBook.WebApi.Controllers
         protected UnprocessableEntityResult UnprocessableEntity(ModelStateDictionary modelState) => new UnprocessableEntityResult(modelState);
 
         protected ConflictResult Conflict(string message) => new ConflictResult(message);
-
-        protected StatusCodeResult StatusCode(HttpStatusCode statusCode) => StatusCode((int) statusCode);
     }
 }
