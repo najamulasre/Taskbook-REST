@@ -251,6 +251,11 @@ namespace Najam.TaskBook.Business
                 .Where(g => g.UserId == userId)
                 .SelectMany(g => g.Group.Tasks);
 
+            if (!string.IsNullOrWhiteSpace(parameters.SearchQuery))
+            {
+                query = query.Where(t => t.Title.Contains(parameters.SearchQuery) || t.Description.Contains(parameters.SearchQuery));
+            }
+
             int totalCount = query.Count();
 
             query = query

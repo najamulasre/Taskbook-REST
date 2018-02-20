@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -46,13 +47,8 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             UserTaskPage taskPage = await _taskBookBusiness.GetUsersTaskByUserId(loggedOnUser.Id, parameters);
 
-            string previousPageLink = taskPage.HasPreviousPage
-                ? _urlHelper.Link(nameof(GetAllUserTasks), new {PageSize = taskPage.PageSize, PageNumber = taskPage.CurrentPage - 1})
-                : null;
-
-            string nextPageLink = taskPage.HasNextPage
-                ? _urlHelper.Link(nameof(GetAllUserTasks), new { PageSize = taskPage.PageSize, PageNumber = taskPage.CurrentPage + 1 })
-                : null;
+            string previousPageLink = CreatePageLink(taskPage, parameters, -1);
+            string nextPageLink = CreatePageLink(taskPage, parameters, 1);
 
             var metaData = new
             {
@@ -71,6 +67,26 @@ namespace Najam.TaskBook.WebApi.Controllers
             var models = _mapper.Map<TaskViewModel[]>(taskPage.Tasks);
 
             return Ok(models);
+        }
+
+        private string CreatePageLink(UserTaskPage taskPage, GetUserTasksParameters parameters, int offset)
+        {
+            if (offset > 0 && !taskPage.HasNextPage)
+                return null;
+
+            if (offset < 0 && !taskPage.HasPreviousPage)
+                return null;
+
+            var routeValues = new
+            {
+                PageSize = taskPage.PageSize,
+                PageNumber = taskPage.CurrentPage + offset,
+                SearchQuery = parameters.SearchQuery
+            };
+
+            string link = _urlHelper.Link(nameof(GetAllUserTasks), routeValues);
+
+            return link;
         }
 
         [HttpGet("{taskId}")]

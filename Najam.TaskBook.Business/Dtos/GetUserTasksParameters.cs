@@ -12,5 +12,7 @@ namespace Najam.TaskBook.Business.Dtos
 
         [Range(1, MaxPageSize, ErrorMessage = "{0} must be between {1} and {2}")]
         public int PageSize { get; set; } = 10;
+
+        public string SearchQuery { get; set; }
     }
 }
