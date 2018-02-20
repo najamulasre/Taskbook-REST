@@ -251,11 +251,25 @@ namespace Najam.TaskBook.Business
                 .Where(g => g.UserId == userId)
                 .SelectMany(g => g.Group.Tasks);
 
+            // Search Query
             if (!string.IsNullOrWhiteSpace(parameters.SearchQuery))
-            {
                 query = query.Where(t => t.Title.Contains(parameters.SearchQuery) || t.Description.Contains(parameters.SearchQuery));
-            }
 
+            // Filtering
+            if (!string.IsNullOrWhiteSpace(parameters.GroupName))
+                query = query.Where(t => t.Group.Name == parameters.GroupName);
+
+            if (parameters.Overdue.HasValue)
+                query = query.Where(t => t.IsOverdue == parameters.Overdue);
+
+            if (!string.IsNullOrEmpty(parameters.CreatedBy))
+                query = query.Where(t => t.CreatedByUser.UserName == parameters.CreatedBy);
+
+            if (!string.IsNullOrWhiteSpace(parameters.AssignedTo))
+                query = query.Where(t => t.AssignedToUserId.HasValue && t.AssignedToUser.UserName == parameters.AssignedTo);
+
+
+            // Paging
             int totalCount = query.Count();
 
             query = query

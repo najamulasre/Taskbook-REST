@@ -81,7 +81,11 @@ namespace Najam.TaskBook.WebApi.Controllers
             {
                 PageSize = taskPage.PageSize,
                 PageNumber = taskPage.CurrentPage + offset,
-                SearchQuery = parameters.SearchQuery
+                parameters.SearchQuery,
+                parameters.GroupName,
+                parameters.Overdue,
+                parameters.CreatedBy,
+                parameters.AssignedTo
             };
 
             string link = _urlHelper.Link(nameof(GetAllUserTasks), routeValues);
