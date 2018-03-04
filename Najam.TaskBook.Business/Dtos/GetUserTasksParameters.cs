@@ -22,5 +22,7 @@ namespace Najam.TaskBook.Business.Dtos
         public string CreatedBy { get; set; }
 
         public string AssignedTo { get; set; }
+
+        public string OrderBy { get; set; }
     }
 }

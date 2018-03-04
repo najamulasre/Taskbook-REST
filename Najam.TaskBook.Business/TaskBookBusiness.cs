@@ -249,7 +249,10 @@ namespace Najam.TaskBook.Business
 
             IQueryable<Task> query = _dbContext.UserGroups
                 .Where(g => g.UserId == userId)
-                .SelectMany(g => g.Group.Tasks);
+                .SelectMany(g => g.Group.Tasks)
+                .Include(t => t.Group)
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.AssignedToUser);
 
             // Search Query
             if (!string.IsNullOrWhiteSpace(parameters.SearchQuery))
@@ -268,15 +271,88 @@ namespace Najam.TaskBook.Business
             if (!string.IsNullOrWhiteSpace(parameters.AssignedTo))
                 query = query.Where(t => t.AssignedToUserId.HasValue && t.AssignedToUser.UserName == parameters.AssignedTo);
 
+            // Sorting
+            if (!string.IsNullOrWhiteSpace(parameters.OrderBy))
+            {
+                string orderBy = parameters.OrderBy
+                    .Replace(" ", string.Empty)
+                    .ToLower();
+
+                switch (orderBy)
+                {
+                    case "groupname":
+                        query = query.OrderBy(t => t.Group.Name);
+                        break;
+                    case "-groupname":
+                        query = query.OrderByDescending(t => t.Group.Name);
+                        break;
+
+                    case "title":
+                        query = query.OrderBy(t => t.Title);
+                        break;
+                    case "-title":
+                        query = query.OrderByDescending(t => t.Title);
+                        break;
+
+                    case "datetimecreated":
+                        query = query.OrderBy(t => t.DateTimeCreated);
+                        break;
+                    case "-datetimecreated":
+                        query = query.OrderByDescending(t => t.DateTimeCreated);
+                        break;
+
+                    case "deadline":
+                        query = query.OrderBy(t => t.Deadline);
+                        break;
+                    case "-deadline":
+                        query = query.OrderByDescending(t => t.Deadline);
+                        break;
+
+                    case "datetimecompleted":
+                        query = query.OrderBy(t => t.DateTimeCompleted);
+                        break;
+                    case "-datetimecompleted":
+                        query = query.OrderByDescending(t => t.DateTimeCompleted);
+                        break;
+
+                    case "isoverdue":
+                        query = query.OrderBy(t => t.IsOverdue);
+                        break;
+                    case "-isoverdue":
+                        query = query.OrderByDescending(t => t.IsOverdue);
+                        break;
+
+                    case "createdby":
+                        query = query.OrderBy(t => t.CreatedByUser.UserName);
+                        break;
+                    case "-createdby":
+                        query = query.OrderByDescending(t => t.CreatedByUser.UserName);
+                        break;
+
+                    case "assignedto":
+                        query = query.OrderBy(t => t.AssignedToUser.UserName);
+                        break;
+                    case "-assignedto":
+                        query = query.OrderByDescending(t => t.AssignedToUser.UserName);
+                        break;
+
+                    case "datetimeassigned":
+                        query = query.OrderBy(t => t.DateTimeAssigned);
+                        break;
+                    case "-datetimeassigned":
+                        query = query.OrderByDescending(t => t.DateTimeAssigned);
+                        break;
+
+                    default:
+                        query = query.OrderBy(t => t.Deadline);
+                        break;
+                }
+            }
 
             // Paging
             int totalCount = query.Count();
 
             query = query
-                .Include(t => t.Group)
-                .Include(t => t.CreatedByUser)
-                .Include(t => t.AssignedToUser)
-                .OrderBy(t => t.Deadline)
                 .Skip(skip)
                 .Take(take);
 
