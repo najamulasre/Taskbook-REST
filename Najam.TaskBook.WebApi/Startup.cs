@@ -12,10 +12,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Data;
-using Najam.TaskBook.Domain;
+using Najam.TaskBook.WebApi.Business;
 using Najam.TaskBook.WebApi.Config;
+using Najam.TaskBook.WebApi.Data;
+using Najam.TaskBook.WebApi.Data.Entities;
 using Newtonsoft.Json.Serialization;
 
 namespace Najam.TaskBook.WebApi

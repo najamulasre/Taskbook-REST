@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.Tasks;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
+using ITaskBookBusiness = Najam.TaskBook.WebApi.Business.ITaskBookBusiness;
+using Task = Najam.TaskBook.WebApi.Data.Entities.Task;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
 
 namespace Najam.TaskBook.WebApi.Controllers
 {
@@ -29,7 +31,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task[] userTasks = await _taskBookBusiness.GetUsersTaskCompletionsByUserId(loggedOnUser.Id);
+            Task[] userTasks = await _taskBookBusiness.GetUsersTaskCompletionsByUserId(loggedOnUser.Id);
 
             var models = _mapper.Map<TaskViewModel[]>(userTasks);
 
@@ -41,7 +43,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task completedTask = await _taskBookBusiness.GetUsersTaskCompletionByUserAndTaskId(loggedOnUser.Id, taskId);
+            Task completedTask = await _taskBookBusiness.GetUsersTaskCompletionByUserAndTaskId(loggedOnUser.Id, taskId);
 
             if (completedTask == null)
                 return NotFound();
@@ -59,7 +61,7 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task userTask = await _taskBookBusiness.GetUsersTaskByUserAndTaskId(loggedOnUser.Id, taskId.Value);
+            Task userTask = await _taskBookBusiness.GetUsersTaskByUserAndTaskId(loggedOnUser.Id, taskId.Value);
 
             if (userTask == null)
                 return NotFound();
@@ -72,12 +74,12 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             if (userTask.DateTimeCompleted.HasValue)
             {
-                Domain.Task existing = await _taskBookBusiness.GetUsersTaskCompletionByUserAndTaskId(loggedOnUser.Id, taskId.Value);
+                Task existing = await _taskBookBusiness.GetUsersTaskCompletionByUserAndTaskId(loggedOnUser.Id, taskId.Value);
                 var existingModel = _mapper.Map<TaskViewModel>(existing);
                 return Ok(existingModel);
             }
 
-            Domain.Task completedTask = await _taskBookBusiness.CreateTaskCompletion(loggedOnUser.Id, taskId.Value);
+            Task completedTask = await _taskBookBusiness.CreateTaskCompletion(loggedOnUser.Id, taskId.Value);
 
             var model = _mapper.Map<TaskViewModel>(completedTask);
 
@@ -89,7 +91,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task completedTask = await _taskBookBusiness.GetUsersTaskCompletionByUserAndTaskId(loggedOnUser.Id, taskId);
+            Task completedTask = await _taskBookBusiness.GetUsersTaskCompletionByUserAndTaskId(loggedOnUser.Id, taskId);
 
             if (completedTask?.DateTimeCompleted == null || completedTask.AssignedToUserId == null)
                 return NotFound();

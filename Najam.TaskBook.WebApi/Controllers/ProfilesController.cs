@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.Profiles;
 using Najam.TaskBook.WebApi.Parameters.Profiles;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
 
 namespace Najam.TaskBook.WebApi.Controllers
 {

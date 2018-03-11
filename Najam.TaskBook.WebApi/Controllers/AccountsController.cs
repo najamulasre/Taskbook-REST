@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Config;
 using Najam.TaskBook.WebApi.Models;
 using Najam.TaskBook.WebApi.Parameters.Accounts;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
 
 
 namespace Najam.TaskBook.WebApi.Controllers

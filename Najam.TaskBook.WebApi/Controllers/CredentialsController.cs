@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Parameters.Credentials;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
 
 namespace Najam.TaskBook.WebApi.Controllers
 {

@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.Tasks;
 using Najam.TaskBook.WebApi.Parameters.GroupTasks;
-using Task = Najam.TaskBook.Domain.Task;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
+using ITaskBookBusiness = Najam.TaskBook.WebApi.Business.ITaskBookBusiness;
+using Task = Najam.TaskBook.WebApi.Data.Entities.Task;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
 
 namespace Najam.TaskBook.WebApi.Controllers
 {

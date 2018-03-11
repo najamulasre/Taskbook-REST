@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.Tasks;
 using Najam.TaskBook.WebApi.Parameters.TaskAssignments;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
+using ITaskBookBusiness = Najam.TaskBook.WebApi.Business.ITaskBookBusiness;
+using Task = Najam.TaskBook.WebApi.Data.Entities.Task;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
 
 namespace Najam.TaskBook.WebApi.Controllers
 {
@@ -30,7 +32,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task[] userTasks = await _taskBookBusiness.GetUsersTaskAssignmentsByUserId(loggedOnUser.Id);
+            Task[] userTasks = await _taskBookBusiness.GetUsersTaskAssignmentsByUserId(loggedOnUser.Id);
 
             var models = _mapper.Map<TaskViewModel[]>(userTasks);
 
@@ -42,7 +44,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task assignedTask = await _taskBookBusiness.GetUsersTaskAssignmentByUserAndTaskId(loggedOnUser.Id, taskId);
+            Task assignedTask = await _taskBookBusiness.GetUsersTaskAssignmentByUserAndTaskId(loggedOnUser.Id, taskId);
 
             if (assignedTask == null)
                 return NotFound();
@@ -60,7 +62,7 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task userTask = await _taskBookBusiness.GetUsersTaskByUserAndTaskId(loggedOnUser.Id, taskId.Value);
+            Task userTask = await _taskBookBusiness.GetUsersTaskByUserAndTaskId(loggedOnUser.Id, taskId.Value);
 
             if (userTask == null)
                 return NotFound();
@@ -73,13 +75,13 @@ namespace Najam.TaskBook.WebApi.Controllers
                 if (userTask.DateTimeCompleted.HasValue)
                     return Conflict("Cannot create task assignment for a completed task.");
 
-                Domain.Task existing = await _taskBookBusiness.GetUsersTaskAssignmentByUserAndTaskId(loggedOnUser.Id, taskId.Value);
+                Task existing = await _taskBookBusiness.GetUsersTaskAssignmentByUserAndTaskId(loggedOnUser.Id, taskId.Value);
                 var existingModel = _mapper.Map<TaskViewModel>(existing);
 
                 return Ok(existingModel);
             }
 
-            Domain.Task assignedTask = await _taskBookBusiness.CreateTaskAssignmen(loggedOnUser.Id, taskId.Value);
+            Task assignedTask = await _taskBookBusiness.CreateTaskAssignmen(loggedOnUser.Id, taskId.Value);
 
             var model = _mapper.Map<TaskViewModel>(assignedTask);
 
@@ -91,7 +93,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
 
-            Domain.Task assignedTask = await _taskBookBusiness.GetUsersTaskAssignmentByUserAndTaskId(loggedOnUser.Id, taskId);
+            Task assignedTask = await _taskBookBusiness.GetUsersTaskAssignmentByUserAndTaskId(loggedOnUser.Id, taskId);
 
             if (assignedTask?.AssignedToUserId == null)
                 return NotFound();

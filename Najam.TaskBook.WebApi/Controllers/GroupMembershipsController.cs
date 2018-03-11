@@ -3,10 +3,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.GroupMemberships;
 using Najam.TaskBook.WebApi.Parameters.GroupMemberships;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
+using ITaskBookBusiness = Najam.TaskBook.WebApi.Business.ITaskBookBusiness;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
+using UserGroup = Najam.TaskBook.WebApi.Data.Entities.UserGroup;
+using UserGroupRelationType = Najam.TaskBook.WebApi.Data.Entities.UserGroupRelationType;
 
 namespace Najam.TaskBook.WebApi.Controllers
 {

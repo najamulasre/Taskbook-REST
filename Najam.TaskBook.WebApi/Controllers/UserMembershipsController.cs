@@ -2,9 +2,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Najam.TaskBook.Business;
-using Najam.TaskBook.Domain;
 using Najam.TaskBook.WebApi.Models.UserMemberships;
+using IIdentityBusiness = Najam.TaskBook.WebApi.Business.IIdentityBusiness;
+using ITaskBookBusiness = Najam.TaskBook.WebApi.Business.ITaskBookBusiness;
+using User = Najam.TaskBook.WebApi.Data.Entities.User;
+using UserGroup = Najam.TaskBook.WebApi.Data.Entities.UserGroup;
 
 namespace Najam.TaskBook.WebApi.Controllers
 {
