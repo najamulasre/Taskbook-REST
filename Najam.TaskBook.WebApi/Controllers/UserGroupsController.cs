@@ -33,6 +33,7 @@ namespace Najam.TaskBook.WebApi.Controllers
 
 
         [HttpGet]
+        [HttpHead]
         public async Task<IActionResult> GetAllUserGroups()
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -45,6 +46,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{groupId}", Name = nameof(GetUserGroupById))]
+        [HttpGet("{groupId}")]
         public async Task<IActionResult> GetUserGroupById(Guid groupId)
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -124,6 +126,13 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             await _taskBookBusiness.DeleteGroup(groupId);
 
+            return NoContent();
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "GET,HEAD,POST,PUT,DELETE,OPTIONS");
             return NoContent();
         }
     }

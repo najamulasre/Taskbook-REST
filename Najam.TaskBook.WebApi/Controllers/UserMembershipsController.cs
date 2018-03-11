@@ -29,6 +29,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public async Task<IActionResult> GetUserMemberships()
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -38,6 +39,13 @@ namespace Najam.TaskBook.WebApi.Controllers
             var models = _mapper.Map<UserMembershipsViewModel[]>(memberships);
 
             return Ok(models);
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "GET,HEAD,OPTIONS");
+            return NoContent();
         }
     }
 }

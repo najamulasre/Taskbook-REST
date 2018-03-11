@@ -24,6 +24,8 @@ namespace Najam.TaskBook.WebApi.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        [HttpHead]
         public async Task<IActionResult> GetProfile(string userName)
         {
             User user = await _identityBusiness.FindByNameAsync(userName);
@@ -126,6 +128,13 @@ namespace Najam.TaskBook.WebApi.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
+            return NoContent();
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "GET,HEAD,PUT,PATCH,OPTIONS");
             return NoContent();
         }
     }

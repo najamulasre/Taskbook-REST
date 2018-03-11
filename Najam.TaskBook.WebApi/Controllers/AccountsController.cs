@@ -35,6 +35,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{userName}", Name = nameof(GetAccount))]
+        [HttpHead("{userName}")]
         public async Task<IActionResult> GetAccount(string userName)
         {
             var user = await _identityBusiness.GetUserAsync(User);
@@ -127,6 +128,13 @@ namespace Najam.TaskBook.WebApi.Controllers
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "GET,HEAD,POST,OPTIONS");
+            return NoContent();
         }
     }
 }

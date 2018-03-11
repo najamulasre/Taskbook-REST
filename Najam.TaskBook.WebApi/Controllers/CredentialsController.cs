@@ -52,5 +52,12 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             return UnprocessableEntity(ModelState);
         }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "PUT,OPTIONS");
+            return NoContent();
+        }
     }
 }

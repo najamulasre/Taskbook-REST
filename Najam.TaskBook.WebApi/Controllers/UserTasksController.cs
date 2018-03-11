@@ -36,6 +36,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet(Name = nameof(GetAllUserTasks))]
+        [HttpHead]
         public async Task<IActionResult> GetAllUserTasks(GetUserTasksParameters parameters)
         {
             if (parameters == null)
@@ -95,6 +96,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{taskId}")]
+        [HttpHead("{taskId}")]
         public async Task<IActionResult> GetUserTasksByTaskId(Guid taskId)
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -107,6 +109,13 @@ namespace Najam.TaskBook.WebApi.Controllers
             var model = _mapper.Map<TaskViewModel>(userTask);
 
             return Ok(model);
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "GET,HEAD,OPTIONS");
+            return NoContent();
         }
     }
 }

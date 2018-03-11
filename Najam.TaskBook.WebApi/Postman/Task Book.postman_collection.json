@@ -8,6 +8,7 @@
 	"item": [
 		{
 			"name": "Accounts",
+			"description": null,
 			"item": [
 				{
 					"name": "Create Account - User1",
@@ -32,7 +33,8 @@
 								"api",
 								"accounts"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -59,7 +61,8 @@
 								"api",
 								"accounts"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -86,7 +89,8 @@
 								"api",
 								"accounts"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -113,7 +117,8 @@
 								"api",
 								"accounts"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -140,7 +145,8 @@
 								"api",
 								"accounts"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -167,7 +173,8 @@
 								"api",
 								"accounts"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -194,7 +201,8 @@
 								"api",
 								"accounts"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -249,7 +257,8 @@
 								"accounts",
 								"{{loggedOnUserName}}"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -292,7 +301,8 @@
 								"accounts",
 								"logon"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -335,7 +345,8 @@
 								"accounts",
 								"logon"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -390,7 +401,8 @@
 								"accounts",
 								"invalid.user"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -398,6 +410,7 @@
 		},
 		{
 			"name": "Credentials",
+			"description": null,
 			"item": [
 				{
 					"name": "Change Password",
@@ -434,7 +447,8 @@
 								"{{user1}}",
 								"credentials"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -442,6 +456,7 @@
 		},
 		{
 			"name": "Profiles",
+			"description": null,
 			"item": [
 				{
 					"name": "Get Profile",
@@ -473,7 +488,8 @@
 								"{{user1}}",
 								"profile"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -512,7 +528,8 @@
 								"{{user1}}",
 								"profile"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -555,7 +572,8 @@
 								"{{user1}}",
 								"profile"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -563,6 +581,7 @@
 		},
 		{
 			"name": "User Own Groups",
+			"description": null,
 			"item": [
 				{
 					"name": "Get All User Groups",
@@ -592,7 +611,8 @@
 								"api",
 								"groups"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -629,7 +649,8 @@
 								"api",
 								"groups"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -662,7 +683,8 @@
 								"groups",
 								"0beed7a7-4855-4fd0-b87f-2f2e8072e80a"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -695,7 +717,8 @@
 								"groups",
 								"9b98bfa7-9cfe-40c7-a6db-b5c7eb434617"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -733,7 +756,8 @@
 								"groups",
 								"0beed7a7-4855-4fd0-b87f-2f2e8072e80a"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -763,7 +787,43 @@
 		},
 		{
 			"name": "Group Memberships",
+			"description": null,
 			"item": [
+				{
+					"name": "Get Options",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "OPTIONS",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
 				{
 					"name": "Get All",
 					"request": {
@@ -794,7 +854,43 @@
 								"{{manglaGroupId}}",
 								"memberships"
 							]
-						}
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Head All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "HEAD",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships"
+							]
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -829,7 +925,44 @@
 								"memberships",
 								"{{user2}}"
 							]
-						}
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Head by UserName",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "HEAD",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/memberships/{{user1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"memberships",
+								"{{user1}}"
+							]
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -868,7 +1001,8 @@
 								"d3838c67-f938-4b05-8b81-2dfa29f8f18f",
 								"memberships"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -903,7 +1037,8 @@
 								"memberships",
 								"{{user1}}"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -950,6 +1085,38 @@
 			"description": "",
 			"item": [
 				{
+					"name": "Options All Group Tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "OPTIONS",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"tasks"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Get All Group Tasks",
 					"request": {
 						"auth": {
@@ -982,6 +1149,38 @@
 					"response": []
 				},
 				{
+					"name": "Head All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "HEAD",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"tasks"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Get Group Task",
 					"request": {
 						"auth": {
@@ -995,6 +1194,39 @@
 							]
 						},
 						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/groups/{{manglaGroupId}}/tasks/4baecaeb-8bf7-4a1b-9ce7-ca443f9581d8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"{{manglaGroupId}}",
+								"tasks",
+								"4baecaeb-8bf7-4a1b-9ce7-ca443f9581d8"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Head Group Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "HEAD",
 						"header": [],
 						"body": {},
 						"url": {
@@ -1160,7 +1392,7 @@
 								"tasks"
 							]
 						},
-						"description": ""
+						"description": "Uses default pageNumber=1, pageSize=10"
 					},
 					"response": []
 				},
@@ -1388,6 +1620,80 @@
 							]
 						},
 						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User - OrderBy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/tasks?orderBy=title",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "title",
+									"equals": true
+								}
+							]
+						},
+						"description": "Supported order by properties\n=============================\n- groupName\n- title\n- dateTimeCreated\n- deadline\n- dateTimeComplete\n- isOverdue\n- createdBy\n- assignedTo\n- dateTimeAssigned\n\nDefault sort order is by **deadline**\n\nPrefix minus sign `-` for descending order"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User - OrderBy Descending",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/tasks?orderBy=-title",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "-title",
+									"equals": true
+								}
+							]
+						},
+						"description": "Supported order by properties\n=============================\n- groupName\n- title\n- dateTimeCreated\n- deadline\n- dateTimeComplete\n- isOverdue\n- createdBy\n- assignedTo\n- dateTimeAssigned\n\nDefault sort order is by **deadline**\n\nPrefix minus sign `-` for descending order"
 					},
 					"response": []
 				},

@@ -27,6 +27,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public async Task<IActionResult> GetAllUserTaskCompletions()
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -39,6 +40,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{taskId}", Name = nameof(GetUserTaskCompletionByTaskId))]
+        [HttpHead("{taskId}")]
         public async Task<IActionResult> GetUserTaskCompletionByTaskId(Guid taskId)
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -104,6 +106,13 @@ namespace Najam.TaskBook.WebApi.Controllers
             if (!deleted)
                 return NotFound();
 
+            return NoContent();
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "GET,HEAD,PUT,DELETE,OPTIONS");
             return NoContent();
         }
     }

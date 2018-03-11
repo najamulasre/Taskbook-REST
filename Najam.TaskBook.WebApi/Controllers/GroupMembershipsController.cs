@@ -29,6 +29,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{memberUserName}", Name = nameof(GetMembershipByMemberUserName))]
+        [HttpHead("{memberUserName}")]
         public async Task<IActionResult> GetMembershipByMemberUserName(Guid groupId, string memberUserName)
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -54,6 +55,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public async Task<IActionResult> GetAllMemberships(Guid groupId)
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);
@@ -130,6 +132,13 @@ namespace Najam.TaskBook.WebApi.Controllers
 
             await _taskBookBusiness.DeleteGroupMembership(memberUser.Id, groupId);
 
+            return NoContent();
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            Response.Headers.Add("Allow", "GET,POST,DELETE,HEAD,OPTIONS");
             return NoContent();
         }
     }
