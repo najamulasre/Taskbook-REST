@@ -46,7 +46,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpGet("{groupId}", Name = nameof(GetUserGroupById))]
-        [HttpGet("{groupId}")]
+        [HttpHead("{groupId}")]
         public async Task<IActionResult> GetUserGroupById(Guid groupId)
         {
             User loggedOnUser = await _identityBusiness.GetUserAsync(User);

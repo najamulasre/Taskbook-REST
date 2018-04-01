@@ -17,6 +17,7 @@ using Najam.TaskBook.WebApi.Config;
 using Najam.TaskBook.WebApi.Data;
 using Najam.TaskBook.WebApi.Data.Entities;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Najam.TaskBook.WebApi
 {
@@ -48,6 +49,11 @@ namespace Najam.TaskBook.WebApi
             AddMvc(services);
 
             AddUrlHelper(services);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "TaskBook", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +65,15 @@ namespace Najam.TaskBook.WebApi
             }
 
             app.UseAuthentication();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TaskBook V1");
+            });
 
             app.UseMvc();
         }
