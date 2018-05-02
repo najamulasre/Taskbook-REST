@@ -113,7 +113,7 @@ namespace Najam.TaskBook.WebApi.Controllers
         }
 
         [HttpPut("{taskId}")]
-        public async Task<ActionResult> CreateTask(Guid groupId, Guid taskId, [FromBody] UpdateGroupTaskParameters parameters)
+        public async Task<ActionResult> UpdateTask(Guid groupId, Guid taskId, [FromBody] UpdateGroupTaskParameters parameters)
         {
             if (parameters == null)
                 return BadRequest();
