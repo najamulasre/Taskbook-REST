@@ -28,7 +28,7 @@ namespace Najam.TaskBook.WebApi.Mappings
                 .ForMember(t => t.GroupName, opt => opt.MapFrom(s => s.Group.Name));
 
             CreateMap<UserGroup, UserMembershipsViewModel>()
-                .ForMember(t => t.UserName, opt => opt.MapFrom(s => s.User.UserName.ToUpper()))
+                .ForMember(t => t.UserName, opt => opt.MapFrom(s => s.User.UserName))
                 .ForMember(t => t.GroupId, opt => opt.MapFrom(s => s.Group.Id))
                 .ForMember(t => t.GroupName, opt => opt.MapFrom(s => s.Group.Name))
                 .ForMember(t => t.IsGroupActive, opt => opt.MapFrom(s => s.Group.IsActive))
