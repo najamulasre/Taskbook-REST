@@ -9,6 +9,8 @@ Taskbook is a software project to implement **RESTfull** architecture. The proje
 - [Getting Started with Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/get-started/)
 - [Get started with Visual Studio](https://visualstudio.microsoft.com/vs/getting-started/)
 - [GitHub Guides logo](https://guides.github.com/)
+- [stack**overflow**](https://stackoverflow.com/)
+- [PLURALSIGHT](https://www.pluralsight.com/)
 
 ## Developement Tools/Languages/Frameworks used
 - Microsoft Visual Studio 2017 (Community Edition)
