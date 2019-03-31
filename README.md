@@ -23,4 +23,4 @@ Taskbook is a software project to implement **RESTfull** architecture. The proje
 - Microsoft Project
 - draw.io
 
-**A comprehensive project report (PDF format) detailing the entire research, design and development processes is part of this repo**
+**A comprehensive [project report (PDF format)](https://github.com/najamulasre/Taskbook-REST/blob/master/ProjectReport.pdf) detailing the entire research, design and development processes is part of this repo**
